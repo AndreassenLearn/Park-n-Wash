@@ -6,22 +6,16 @@ namespace Park_n_Wash
 {
     class TicketMachine
     {
-        private readonly Dictionary<SlotTypes, string> slotTypeNames = new Dictionary<SlotTypes, string>
-        {
-            { SlotTypes.Normal, "NormalSlot" },
-            { SlotTypes.Handicap, "HandicapSlot" },
-            { SlotTypes.Large, "LargeSlot" },
-            { SlotTypes.Trailer, "TrailerSlot" }
-        };
-        
-        private SlotHandler slotHandler = new SlotHandler();
+        private SlotHandler SlotHandler { get; set; }
 
-        public void ListSlots()
+        public TicketMachine() => SlotHandler = new SlotHandler();
+
+        public void ListSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots)
         {
-            List<ISlot> normalSlots = slotHandler.GetAvailableSlots(slotTypeNames[SlotTypes.Normal]);
-            List<ISlot> handicapSlots = slotHandler.GetAvailableSlots(slotTypeNames[SlotTypes.Handicap]);
-            List<ISlot> largeSlots = slotHandler.GetAvailableSlots(slotTypeNames[SlotTypes.Large]);
-            List<ISlot> trailerSlots = slotHandler.GetAvailableSlots(slotTypeNames[SlotTypes.Trailer]);
+            normalSlots = SlotHandler.GetAvailableSlots(SlotHandler.SlotTypes.Normal);
+            handicapSlots = SlotHandler.GetAvailableSlots(SlotHandler.SlotTypes.Handicap);
+            largeSlots = SlotHandler.GetAvailableSlots(SlotHandler.SlotTypes.Large);
+            trailerSlots = SlotHandler.GetAvailableSlots(SlotHandler.SlotTypes.Trailer);
         }
     }
 }
