@@ -5,12 +5,11 @@ namespace Park_n_Wash
 {
     class Program
     {
-        static private TicketMachine ticketMachine = new TicketMachine();
+        static private TicketMachine _ticketMachine = new TicketMachine();
 
         static void Main(string[] args)
         {
-            Console.WriteLine("##### Welcome to Park'n'Wash #####");
-            ticketMachine.ListSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
+            _ticketMachine.RunApplication();
         }
     }
 }

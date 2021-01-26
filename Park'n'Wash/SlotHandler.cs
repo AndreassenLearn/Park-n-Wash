@@ -11,6 +11,9 @@ namespace Park_n_Wash
         private readonly int _largeSlotCount = 12;
         private readonly int _trailerSlotCount = 10;
 
+        /// <summary>
+        /// Defines the type of a parking slot.
+        /// </summary>
         public enum SlotTypes
         {
             Normal = 0,
@@ -29,6 +32,10 @@ namespace Park_n_Wash
             Initialize();
         }
 
+        /// <summary>
+        /// Get free parking slots of a specific type.
+        /// </summary>
+        /// <returns>List of free parking slots.</returns>
         public List<ISlot> GetAvailableSlots(SlotTypes slotType)
         {
             switch (slotType)
@@ -46,6 +53,24 @@ namespace Park_n_Wash
             }
         }
 
+        /// <summary>
+        /// Get all free parking slots.
+        /// </summary>
+        /// <param name="normalSlots">List to contain normal parking slots.</param>
+        /// <param name="handicapSlots">List to contain handicap parking slots.</param>
+        /// <param name="largeSlots">List to contain large parking slots.</param>
+        /// <param name="trailerSlots">List to contain trailer parking slots.</param>
+        public void GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots)
+        {
+            normalSlots = NormalSlots;
+            handicapSlots = HandicapSlots;
+            largeSlots = LargeSlots;
+            trailerSlots = TrailerSlots;
+        }
+
+        /// <summary>
+        /// Initialize parking slot lists with new empty parking slots.
+        /// </summary>
         private void Initialize()
         {
             int id = 0;
