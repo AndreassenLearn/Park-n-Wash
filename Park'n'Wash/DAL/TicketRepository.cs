@@ -20,7 +20,8 @@ namespace Park_n_Wash.DAL
         /// <param name="ticket"><see cref="Ticket"/> to insert.</param>
         public void Insert(Ticket ticket)
         {
-            _tickets.Add(ticket);
+            if (ticket.IsValid())
+                _tickets.Add(ticket);
         }
 
         /// <summary>
@@ -49,10 +50,10 @@ namespace Park_n_Wash.DAL
         public void Update(Ticket ticket)
         {
             Ticket ticketToUpdate = _tickets.Where(x => x.Id == ticket.Id).FirstOrDefault();
-            if (ticketToUpdate == null)
-                Insert(ticket);
-            else
+            if (ticketToUpdate != null && ticket.IsValid())
                 ticketToUpdate = ticket;
+            else
+                Insert(ticket);
         }
 
         /// <summary>
@@ -62,11 +63,6 @@ namespace Park_n_Wash.DAL
         public void Delete(int id)
         {
             _tickets.RemoveAll(x => x.Id == id);
-        }
-
-        public void Save()
-        {
-            // TODO: Save changes made in repository.
         }
     }
 }
