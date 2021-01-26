@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Park_n_Wash.DAL;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Park_n_Wash
@@ -10,6 +12,8 @@ namespace Park_n_Wash
         private readonly int _handicapSlotCount = 5;
         private readonly int _largeSlotCount = 12;
         private readonly int _trailerSlotCount = 10;
+
+        private SlotRepository _slotRepository;
 
         /// <summary>
         /// Defines the type of a parking slot.
@@ -29,6 +33,7 @@ namespace Park_n_Wash
 
         public SlotHandler()
         {
+            _slotRepository = new SlotRepository();
             Initialize();
         }
 
@@ -41,13 +46,13 @@ namespace Park_n_Wash
             switch (slotType)
             {
                 case SlotTypes.Normal:
-                    return NormalSlots;
+                    return _slotRepository.Get(typeof(NormalSlot)).ToList();
                 case SlotTypes.Handicap:
-                    return HandicapSlots;
+                    return _slotRepository.Get(typeof(HandicapSlot)).ToList();
                 case SlotTypes.Large:
-                    return LargeSlots;
+                    return _slotRepository.Get(typeof(LargeSlot)).ToList();
                 case SlotTypes.Trailer:
-                    return TrailerSlots;
+                    return _slotRepository.Get(typeof(TrailerSlot)).ToList();
                 default:
                     return new List<ISlot>();
             }
@@ -62,10 +67,10 @@ namespace Park_n_Wash
         /// <param name="trailerSlots">List to contain trailer parking slots.</param>
         public void GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots)
         {
-            normalSlots = NormalSlots;
-            handicapSlots = HandicapSlots;
-            largeSlots = LargeSlots;
-            trailerSlots = TrailerSlots;
+            normalSlots = GetAvailableSlots(SlotTypes.Normal);
+            handicapSlots = GetAvailableSlots(SlotTypes.Handicap);
+            largeSlots = GetAvailableSlots(SlotTypes.Large);
+            trailerSlots = GetAvailableSlots(SlotTypes.Trailer);
         }
 
         /// <summary>
@@ -74,29 +79,24 @@ namespace Park_n_Wash
         private void Initialize()
         {
             int id = 0;
-            NormalSlots = new List<ISlot>();
-            HandicapSlots = new List<ISlot>();
-            LargeSlots = new List<ISlot>();
-            TrailerSlots = new List<ISlot>();
-
             for (int i = 0; i < _normalSlotCount; i++)
             {
-                NormalSlots.Add(new NormalSlot(id++));
+                _slotRepository.Insert(new NormalSlot(id++));
             }
 
             for (int i = 0; i < _handicapSlotCount; i++)
             {
-                HandicapSlots.Add(new HandicapSlot(id++));
+                _slotRepository.Insert(new HandicapSlot(id++));
             }
 
             for (int i = 0; i < _largeSlotCount; i++)
             {
-                LargeSlots.Add(new LargeSlot(id++));
+                _slotRepository.Insert(new LargeSlot(id++));
             }
 
             for (int i = 0; i < _trailerSlotCount; i++)
             {
-                TrailerSlots.Add(new TrailerSlot(id++));
+                _slotRepository.Insert(new TrailerSlot(id++));
             }
         }
     }
