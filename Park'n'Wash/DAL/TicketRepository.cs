@@ -39,7 +39,7 @@ namespace Park_n_Wash.DAL
         /// <returns><see cref="Ticket"/></returns>
         public Ticket GetById(int id)
         {
-            return _tickets.Where(x => x.TicketId == id).FirstOrDefault();
+            return _tickets.Where(x => x.Id == id).FirstOrDefault();
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Park_n_Wash.DAL
         /// <param name="ticket"><see cref="Ticket"/> to update (or insert).</param>
         public void Update(Ticket ticket)
         {
-            Ticket ticketToUpdate = _tickets.Where(x => x.TicketId == ticket.TicketId).FirstOrDefault();
+            Ticket ticketToUpdate = _tickets.Where(x => x.Id == ticket.Id).FirstOrDefault();
             if (ticketToUpdate == null)
                 Insert(ticket);
             else
@@ -61,22 +61,7 @@ namespace Park_n_Wash.DAL
         /// <param name="id">Id of <see cref="Ticket"/>.</param>
         public void Delete(int id)
         {
-            _tickets.RemoveAll(x => x.TicketId == id);
-        }
-
-        /// <summary>
-        /// Validate ticket.
-        /// </summary>
-        /// <param name="ticket"><see cref="Ticket"/> to validate.</param>
-        /// <returns>True if valid; otherwise false.</returns>
-        public bool Validate(Ticket ticket)
-        {
-            bool isValid = true;
-            
-            if (ticket.StartTime != null) isValid = false;
-            if (ticket.ParkingSlot != null) isValid = false;
-            
-            return isValid;
+            _tickets.RemoveAll(x => x.Id == id);
         }
 
         public void Save()

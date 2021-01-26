@@ -12,6 +12,6 @@ namespace Park_n_Wash
         /// Check whether <see cref="IBusinessEntity"/> meets reqirements to be valid.
         /// </summary>
         /// <returns>True if valid; otherwise false.</returns>
-        bool Validate();
+        bool IsValid();
     }
 }

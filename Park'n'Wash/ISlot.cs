@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Park_n_Wash
 {
-    public interface ISlot
+    public interface ISlot : IBusinessEntity
     {
-        int SlotId { get; }
         bool IsFree { get; }
         double PricePrHour { get; }
     }

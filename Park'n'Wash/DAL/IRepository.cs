@@ -38,13 +38,6 @@ namespace Park_n_Wash.DAL
         void Delete(int id);
 
         /// <summary>
-        /// Check whether <see cref="T"/> meets reqirements to be valid.
-        /// </summary>
-        /// <param name="t">Object to validate.</param>
-        /// <returns>True if valid; otherwise false.</returns>
-        bool Validate(T t);
-
-        /// <summary>
         /// Save changes made in repository.
         /// </summary>
         void Save();
