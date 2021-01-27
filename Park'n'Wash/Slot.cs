@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Park_n_Wash
 {
-    public abstract class Slot<T> : ISlot
+    public abstract class Slot : BusinessEntity, ISlot
     {
         public int Id { get; }
         public bool IsFree { get; set; }
         public double PricePrHour { get; protected set; }
+        public bool HasCharger { get; protected set; }
 
         public Slot(int slotId)
         {
@@ -16,7 +17,7 @@ namespace Park_n_Wash
             IsFree = true;
         }
 
-        public bool IsValid()
+        public override bool Validate()
         {
             bool isValid = true;
 

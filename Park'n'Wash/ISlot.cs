@@ -8,5 +8,6 @@ namespace Park_n_Wash
     {
         bool IsFree { get; }
         double PricePrHour { get; }
+        bool HasCharger { get; }
     }
 }

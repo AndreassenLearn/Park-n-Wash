@@ -20,7 +20,7 @@ namespace Park_n_Wash.DAL
         /// <param name="slot"><see cref="Slot"/> to insert.</param>
         public void Insert(ISlot slot)
         {
-            if (slot.IsValid())
+            if (slot.Validate())
                 _slots.Add(slot);
         }
 
@@ -59,7 +59,7 @@ namespace Park_n_Wash.DAL
         public void Update(ISlot slot)
         {
             ISlot slotToUpdate = _slots.Where(x => x.Id == slot.Id).FirstOrDefault();
-            if (slotToUpdate != null && slot.IsValid())
+            if (slotToUpdate != null && slot.IsValid)
                 slotToUpdate = slot;
             else
                 Insert(slot);

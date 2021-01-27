@@ -5,22 +5,22 @@ using System.Text;
 
 namespace Park_n_Wash.DAL
 {
-    class TicketRepository : IRepository<Ticket>
+    class TicketRepository : IRepository<ITicket>
     {
-        private List<Ticket> _tickets;
+        private List<ITicket> _tickets;
 
         public TicketRepository()
         {
-            _tickets = new List<Ticket>();
+            _tickets = new List<ITicket>();
         }
 
         /// <summary>
         /// Add ticket to repository.
         /// </summary>
         /// <param name="ticket"><see cref="Ticket"/> to insert.</param>
-        public void Insert(Ticket ticket)
+        public void Insert(ITicket ticket)
         {
-            if (ticket.IsValid())
+            if (ticket.IsValid)
                 _tickets.Add(ticket);
         }
 
@@ -28,7 +28,7 @@ namespace Park_n_Wash.DAL
         /// Get list of tickets.
         /// </summary>
         /// <returns><see cref="IEnumerable{T}"/></returns>
-        public IEnumerable<Ticket> GetAll()
+        public IEnumerable<ITicket> GetAll()
         {
             return _tickets;
         }
@@ -38,7 +38,7 @@ namespace Park_n_Wash.DAL
         /// </summary>
         /// <param name="id">Id of <see cref="Ticket"/>.</param>
         /// <returns><see cref="Ticket"/></returns>
-        public Ticket GetById(int id)
+        public ITicket GetById(int id)
         {
             return _tickets.Where(x => x.Id == id).FirstOrDefault();
         }
@@ -47,10 +47,10 @@ namespace Park_n_Wash.DAL
         /// Update existing ticket in repository. If it doesn't exist; insert it.
         /// </summary>
         /// <param name="ticket"><see cref="Ticket"/> to update (or insert).</param>
-        public void Update(Ticket ticket)
+        public void Update(ITicket ticket)
         {
-            Ticket ticketToUpdate = _tickets.Where(x => x.Id == ticket.Id).FirstOrDefault();
-            if (ticketToUpdate != null && ticket.IsValid())
+            ITicket ticketToUpdate = _tickets.Where(x => x.Id == ticket.Id).FirstOrDefault();
+            if (ticketToUpdate != null && ticket.IsValid)
                 ticketToUpdate = ticket;
             else
                 Insert(ticket);

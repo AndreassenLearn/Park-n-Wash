@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Park_n_Wash
 {
-    class LargeSlot : Slot<int>
+    class LargeSlot : Slot
     {
         public LargeSlot(int slotId) : base(slotId)
         {
