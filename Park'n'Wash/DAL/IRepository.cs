@@ -16,7 +16,7 @@ namespace Park_n_Wash.DAL
         /// Get enumerable of <see cref="T"/>.
         /// </summary>
         /// <returns><see cref="IEnumerable{T}"/></returns>
-        IEnumerable<T> Get();
+        IEnumerable<T> GetAll();
 
         /// <summary>
         /// Get <see cref="T"/> with given id.

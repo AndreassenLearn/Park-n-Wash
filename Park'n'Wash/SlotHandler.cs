@@ -26,11 +26,6 @@ namespace Park_n_Wash
             Trailer
         }
 
-        private List<ISlot> NormalSlots { get; set; }
-        private List<ISlot> HandicapSlots { get; set; }
-        private List<ISlot> LargeSlots { get; set; }
-        private List<ISlot> TrailerSlots { get; set; }
-
         public SlotHandler()
         {
             _slotRepository = new SlotRepository();
@@ -41,21 +36,16 @@ namespace Park_n_Wash
         /// Get free parking slots of a specific type.
         /// </summary>
         /// <returns>List of free parking slots.</returns>
-        public List<ISlot> GetAvailableSlots(SlotTypes slotType)
+        public List<ISlot> GetAvailableSlotsByType(SlotTypes slotType)
         {
-            switch (slotType)
+            return slotType switch
             {
-                case SlotTypes.Normal:
-                    return _slotRepository.Get(typeof(NormalSlot)).ToList();
-                case SlotTypes.Handicap:
-                    return _slotRepository.Get(typeof(HandicapSlot)).ToList();
-                case SlotTypes.Large:
-                    return _slotRepository.Get(typeof(LargeSlot)).ToList();
-                case SlotTypes.Trailer:
-                    return _slotRepository.Get(typeof(TrailerSlot)).ToList();
-                default:
-                    return new List<ISlot>();
-            }
+                SlotTypes.Normal => _slotRepository.GetAllAvailableByType(typeof(NormalSlot)).ToList(),
+                SlotTypes.Handicap => _slotRepository.GetAllAvailableByType(typeof(HandicapSlot)).ToList(),
+                SlotTypes.Large => _slotRepository.GetAllAvailableByType(typeof(LargeSlot)).ToList(),
+                SlotTypes.Trailer => _slotRepository.GetAllAvailableByType(typeof(TrailerSlot)).ToList(),
+                _ => new List<ISlot>(),
+            };
         }
 
         /// <summary>
@@ -67,10 +57,11 @@ namespace Park_n_Wash
         /// <param name="trailerSlots">List to contain trailer parking slots.</param>
         public void GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots)
         {
-            normalSlots = GetAvailableSlots(SlotTypes.Normal);
-            handicapSlots = GetAvailableSlots(SlotTypes.Handicap);
-            largeSlots = GetAvailableSlots(SlotTypes.Large);
-            trailerSlots = GetAvailableSlots(SlotTypes.Trailer);
+            normalSlots = GetAvailableSlotsByType(SlotTypes.Normal);
+            handicapSlots = GetAvailableSlotsByType(SlotTypes.Handicap);
+            largeSlots = GetAvailableSlotsByType(SlotTypes.Large);
+            trailerSlots = GetAvailableSlotsByType(SlotTypes.Trailer);
+
         }
 
         /// <summary>

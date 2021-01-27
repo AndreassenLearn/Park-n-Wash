@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Park_n_Wash.DAL;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,14 @@ namespace Park_n_Wash
 {
     class TicketMachine
     {
-        private SlotHandler _slotHandler = new SlotHandler();
+        private SlotHandler _slotHandler;
+        private TicketRepository _ticketRepository;
+
+        public TicketMachine()
+        {
+            _slotHandler = new SlotHandler();
+            _ticketRepository = new TicketRepository();
+        }
 
         /// <summary>
         /// Run application UI, wait for user input and act accordingly.

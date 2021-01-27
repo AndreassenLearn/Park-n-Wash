@@ -28,7 +28,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AEiAAAAAAgAAgRACAAAAAAAAAAgAAAAAAAAACAAAABA=</HashCode>
+      <HashCode>AEgAAAAAAAAAARACAAAAAAAAAAAAAAAAAAAACAQAABA=</HashCode>
       <FileName>SlotHandler.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -54,21 +54,37 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Park_n_Wash.Program">
-    <Position X="13.25" Y="0.5" Width="1.5" />
+    <Position X="14.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_ticketMachine" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Park_n_Wash.TicketMachine">
-    <Position X="11" Y="0.5" Width="1.5" />
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <AssociationLine Name="_ticketRepository" Type="Park_n_Wash.DAL.TicketRepository" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.5" Y="1.508" />
+        <Point X="10.865" Y="1.508" />
+        <Point X="10.865" Y="10.51" />
+        <Point X="5" Y="10.51" />
+        <Point X="5" Y="9.767" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAICAAAAAA=</HashCode>
       <FileName>TicketMachine.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_slotHandler" />
+      <Field Name="_ticketRepository" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Park_n_Wash.UserInteraction">
-    <Position X="13.25" Y="2.75" Width="1.5" />
+    <Position X="14.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAAIAAAAAAAAAAAAAABACAAAA=</HashCode>
       <FileName>UserInteraction.cs</FileName>
@@ -85,7 +101,7 @@
   <Class Name="Park_n_Wash.DAL.SlotRepository">
     <Position X="6" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAABAAAAAAAIAAAEAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAIAAAEAAAAAAgAAAAAAAoA=</HashCode>
       <FileName>DAL\SlotRepository.cs</FileName>
       <NewMemberFileName>DAL\TicketRepository.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -94,7 +110,7 @@
   <Class Name="Park_n_Wash.DAL.TicketRepository">
     <Position X="4.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAAAEAAAAEAAAAAAAAAIA=</HashCode>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAEAgAAAAAAAIA=</HashCode>
       <FileName>DAL\TicketRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -116,7 +132,7 @@
   <Interface Name="Park_n_Wash.DAL.IRepository&lt;T&gt;">
     <Position X="0.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAAAEAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>DAL\IRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>

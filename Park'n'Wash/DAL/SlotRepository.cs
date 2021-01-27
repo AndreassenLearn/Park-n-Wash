@@ -28,18 +28,18 @@ namespace Park_n_Wash.DAL
         /// Get list of slots.
         /// </summary>
         /// <returns><see cref="IEnumerable{T}"/></returns>
-        public IEnumerable<ISlot> Get()
+        public IEnumerable<ISlot> GetAll()
         {
             return _slots;
         }
 
         /// <summary>
-        /// Get list of slots of specific type.
+        /// Get list of available slots of specific type.
         /// </summary>
         /// <returns><see cref="IEnumerable{T}"/></returns>
-        public IEnumerable<ISlot> Get(Type type)
+        public IEnumerable<ISlot> GetAllAvailableByType(Type type)
         {
-            return _slots.Where(x => x.GetType().Equals(type));
+            return _slots.Where(x => x.IsFree && x.GetType().Equals(type));
         }
 
         /// <summary>

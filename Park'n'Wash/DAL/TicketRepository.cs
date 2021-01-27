@@ -28,7 +28,7 @@ namespace Park_n_Wash.DAL
         /// Get list of tickets.
         /// </summary>
         /// <returns><see cref="IEnumerable{T}"/></returns>
-        public IEnumerable<Ticket> Get()
+        public IEnumerable<Ticket> GetAll()
         {
             return _tickets;
         }
