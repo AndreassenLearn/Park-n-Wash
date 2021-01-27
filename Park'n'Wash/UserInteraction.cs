@@ -46,6 +46,26 @@ namespace Park_n_Wash
         }
 
         /// <summary>
+        /// Let user choose between multiple numbered options.
+        /// </summary>
+        /// <param name="options">List of options to choose from.</param>
+        /// <param name="title">Title displayed above options.</param>
+        /// <returns>List index of chosen option; -1 if 'options' is null or empty.</returns>
+        static public int SelectOption(List<string> options, string title = "Choose one")
+        {
+            if (options == null || options.Count == 0)
+                return -1;
+
+            Console.WriteLine("##### " + title + " #####");
+            for (int i = 1; i <= options.Count; i++)
+            {
+                Console.WriteLine(i + ". " + options[i - 1]);
+            }
+
+            return GetInt(1, options.Count) - 1;
+        }
+
+        /// <summary>
         /// Print a message to the console.
         /// </summary>
         static public void NoFreeSpots()

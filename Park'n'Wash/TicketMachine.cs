@@ -21,21 +21,28 @@ namespace Park_n_Wash
         /// </summary>
         public void RunApplication()
         {
-            Console.WriteLine("##### Welcome to Park'n'Wash #####");
-            
-            _slotHandler.GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
+            Console.WriteLine("Welcome to Park'n'Wash\n");
 
-            Console.WriteLine("##### Available parking slots #####" +
-                "\n1. Regular slots: " + normalSlots.Count +
-                "\n2. Handicap slots: " + handicapSlots.Count +
-                "\n3. Large slots (bus/lorry): " + largeSlots.Count +
-                "\n4. Trailer slots: " + trailerSlots.Count);
+            int userOption = UserInteraction.SelectOption(new List<string> { "Chech In", "Check Out" });
 
-            switch (UserInteraction.GetInt(1, 4))
+            if (userOption == 0)
             {
-                case 1:
+                // Check in.
+                _slotHandler.GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
 
-                    break;
+                userOption = UserInteraction.SelectOption(
+                    new List<string> { 
+                        "Regular slots: " + normalSlots.Count,
+                        "Handicap slots: " + handicapSlots.Count,
+                        "Large slots (bus/lorry): " + largeSlots.Count,
+                        "Trailer slots: " + trailerSlots.Count
+                    },
+                    "Available parking slots");
+            }
+            else if (userOption == 1)
+            {
+                // Check out.
+
             }
         }
     }

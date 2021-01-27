@@ -86,7 +86,7 @@
   <Class Name="Park_n_Wash.UserInteraction">
     <Position X="14.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAAAAAAAAAAIAAAAAAAAAAAAAABACAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIgAAAAAAAAAAIAAAAAAAAAAAAAABACAAAA=</HashCode>
       <FileName>UserInteraction.cs</FileName>
     </TypeIdentifier>
   </Class>
