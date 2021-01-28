@@ -11,7 +11,8 @@ namespace Park_n_Wash.Ticket
     {
         public int Id { get; }
         public DateTime StartTime { get; }
-        public DateTime EndTime { get; private set; }
+        public DateTime? EndTime { get; private set; }
+        public double TotalHours { get; private set; }
         public ISlot ParkingSlot { get; }
         public bool Electric { get; }
         public double Price { get; protected set; }
@@ -20,6 +21,7 @@ namespace Park_n_Wash.Ticket
         {
             Id = ticketId;
             StartTime = DateTime.Now;
+            TotalHours = 0;
             ParkingSlot = parkingSlot;
             Electric = includeCharging && ParkingSlot.HasCharger;
             Price = 0;
@@ -32,14 +34,25 @@ namespace Park_n_Wash.Ticket
         {
             // Calculate price.
             EndTime = DateTime.Now;
-            double hours = (EndTime - StartTime).TotalHours;
-            Price += ParkingSlot.PricePrHour * hours;
+            TotalHours = (EndTime.Value - StartTime).TotalHours;
+            Price += ParkingSlot.PricePrHour * TotalHours;
 
             // TODO: Free parking slot.
 
             // Mark ticket as deleted.
             EntityState = EntityStateOption.Deleted;
         }
+
+        public string PrintableString() =>
+            $"# ##\n" +
+            $"# ##  Ticket: {Id} Slot: {ParkingSlot.Id}\n" +
+            $"# ##\n" +
+            $"# ##  Start Time: {StartTime} End Time: {(EndTime.HasValue ? EndTime.Value.ToString() : "N/A")}\n" +
+            $"# ##  Total hours: {TotalHours}\n" +
+            $"# ##  Charging: {(Electric? "Y" : "N")}\n" +
+            $"# ##\n" +
+            $"# ##  Price: {Price} kr.\n" +
+            $"# ##\n\n";
 
         public override bool Validate()
         {
