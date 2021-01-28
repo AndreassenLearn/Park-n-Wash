@@ -19,6 +19,9 @@ namespace Park_n_Wash.Slot
             IsFree = true;
         }
 
+        public string PrintableString() =>
+            $"ID: {Id}, Is free: {(IsFree ? "Y" : "N")}, Price/hour: {PricePrHour}, Has charger: {(HasCharger ? "Y" : "N")}";
+
         public override bool Validate()
         {
             bool isValid = true;

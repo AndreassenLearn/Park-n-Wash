@@ -19,5 +19,14 @@ namespace Park_n_Wash.Common
                 Console.WriteLine(printable.PrintableString());
             }
         }
+        
+        /// <summary>
+        /// Print an items to the console.
+        /// </summary>
+        /// <param name="printable"><see cref="IPrintable"/> to print.</param>
+        public static void PrintToConsole(this IPrintable printable)
+        {
+            Console.WriteLine(printable.PrintableString());
+        }
     }
 }
