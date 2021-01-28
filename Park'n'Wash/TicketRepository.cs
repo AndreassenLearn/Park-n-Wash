@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Park_n_Wash.Ticket;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Park_n_Wash.DAL
+namespace Park_n_Wash
 {
     class TicketRepository : IRepository<ITicket>
     {
@@ -32,7 +34,7 @@ namespace Park_n_Wash.DAL
         {
             return _tickets;
         }
-        
+
         /// <summary>
         /// Get ticket by id.
         /// </summary>

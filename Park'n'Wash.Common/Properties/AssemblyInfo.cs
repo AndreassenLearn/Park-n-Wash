@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Park'n'Wash")]
+[assembly: AssemblyTitle("Park'n'Wash.Common")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Park'n'Wash")]
+[assembly: AssemblyProduct("Park'n'Wash.Common")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("37c91ce1-706f-42fc-95de-6c003ede2caa")]
+[assembly: Guid("776b539d-fa3e-4372-af1b-a0f41767d99a")]
 
 // Version information for an assembly consists of the following four values:
 //
