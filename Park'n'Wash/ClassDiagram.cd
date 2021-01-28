@@ -4,56 +4,36 @@
     <Position X="2.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>HandicapSlot.cs</FileName>
+      <FileName>Slot\HandicapSlot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Park_n_Wash.Slot">
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAACAAAAAACAAAAAAAAAAAAAAAAAAAACAAAACAAAAAA=</HashCode>
-      <FileName>Slot.cs</FileName>
+      <FileName>Slot\Slot.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Park_n_Wash.SlotHandler">
-    <Position X="14.25" Y="5.5" Width="2" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Enum Name="Park_n_Wash.SlotHandler.SlotTypes">
-        <TypeIdentifier>
-          <NewMemberFileName>SlotHandler.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>AEgAAAAAAAAAARACAAAAAAAAAAAAAAAAAAAACAQAABA=</HashCode>
-      <FileName>SlotHandler.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_slotRepository" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Park_n_Wash.NormalSlot">
     <Position X="0.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>NormalSlot.cs</FileName>
+      <FileName>Slot\NormalSlot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Park_n_Wash.LargeSlot">
     <Position X="4.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>LargeSlot.cs</FileName>
+      <FileName>Slot\LargeSlot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Park_n_Wash.TrailerSlot">
     <Position X="6" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>TrailerSlot.cs</FileName>
+      <FileName>Slot\TrailerSlot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Park_n_Wash.Program">
@@ -88,24 +68,7 @@
     <Position X="7.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAQCABAAAAQAAAAAAIAAgAAAAAAAAAQAAAAA=</HashCode>
-      <FileName>Ticket.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Park_n_Wash.DAL.SlotRepository">
-    <Position X="11.25" Y="7.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAAAAAAAAAAIAAAEAAAAAAgAAAAAAAoA=</HashCode>
-      <FileName>DAL\SlotRepository.cs</FileName>
-      <NewMemberFileName>DAL\TicketRepository.cs</NewMemberFileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Park_n_Wash.DAL.TicketRepository">
-    <Position X="11.25" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAEAgAAAAAAAIA=</HashCode>
-      <FileName>DAL\TicketRepository.cs</FileName>
+      <FileName>Ticket\Ticket.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -120,28 +83,64 @@
     <Position X="7.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BasicTicket.cs</FileName>
+      <FileName>Ticket\BasicTicket.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Park_n_Wash.ServiceTicket">
     <Position X="4.25" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAABCAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ServiceTicket.cs</FileName>
+      <FileName>Ticket\ServiceTicket.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Park_n_Wash.WashTicket">
     <Position X="6" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>WashTicket.cs</FileName>
+      <FileName>Ticket\WashTicket.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="Park_n_Wash.DAL.SlotRepository">
+    <Position X="11.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAIAAAEAAAAAAgAAAAAAAoA=</HashCode>
+      <FileName>SlotRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Park_n_Wash.DAL.TicketRepository">
+    <Position X="11.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAEAgAAAAAAAIA=</HashCode>
+      <FileName>TicketRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Park_n_Wash.SlotHandler">
+    <Position X="14.25" Y="5.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Park_n_Wash.SlotHandler.SlotTypes">
+        <TypeIdentifier>
+          <NewMemberFileName>SlotHandler.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AEgAAAAAAAAAARACAAAAAQAAAAAAAAAAAAAACAQAABA=</HashCode>
+      <FileName>SlotHandler.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_slotRepository" />
+    </ShowAsAssociation>
   </Class>
   <Interface Name="Park_n_Wash.ISlot">
     <Position X="13" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAACAAAAAA=</HashCode>
-      <FileName>ISlot.cs</FileName>
+      <FileName>Slot\ISlot.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Park_n_Wash.IBusinessEntity">
@@ -151,18 +150,18 @@
       <FileName>IBusinessEntity.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Park_n_Wash.DAL.IRepository&lt;T&gt;">
-    <Position X="11.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
-      <FileName>DAL\IRepository.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="Park_n_Wash.ITicket">
     <Position X="16.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAQAAAAAAIAAAAAAAAAAAAQAAAAA=</HashCode>
-      <FileName>ITicket.cs</FileName>
+      <FileName>Ticket\ITicket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Park_n_Wash.DAL.IRepository&lt;T&gt;">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>IRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="Park_n_Wash.EntityStateOption">

@@ -32,7 +32,7 @@ namespace Park_n_Wash
 
                 userOption = UserInteraction.SelectOption(
                     new List<string> { 
-                        "Regular slots: " + normalSlots.Count,
+                        "Regular slots: " + normalSlots.Count + "(" + _slotHandler.ElectricCountAndSort(normalSlots) + " of which offers electric charging)",
                         "Handicap slots: " + handicapSlots.Count,
                         "Large slots (bus/lorry): " + largeSlots.Count,
                         "Trailer slots: " + trailerSlots.Count

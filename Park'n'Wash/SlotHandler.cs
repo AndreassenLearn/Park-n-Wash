@@ -61,7 +61,12 @@ namespace Park_n_Wash
             handicapSlots = GetAvailableSlotsByType(SlotTypes.Handicap);
             largeSlots = GetAvailableSlotsByType(SlotTypes.Large);
             trailerSlots = GetAvailableSlotsByType(SlotTypes.Trailer);
+        }
 
+
+        public int ElectricCountAndSort(List<ISlot> slots)
+        {
+            return 0;
         }
 
         /// <summary>

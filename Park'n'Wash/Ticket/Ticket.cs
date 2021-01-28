@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Park_n_Wash
 {
-    class Ticket : BusinessEntity, ITicket
+    abstract class Ticket : BusinessEntity, ITicket
     {
         public int Id { get; }
         public DateTime StartTime { get; }
