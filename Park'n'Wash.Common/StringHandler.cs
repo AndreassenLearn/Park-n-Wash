@@ -19,7 +19,8 @@ namespace Park_n_Wash.Common
             {
                 if (Char.IsUpper(str[i]) && !Char.IsUpper(str[i - 1]))
                 {
-                    str.Insert(i, " ");
+                    str = str.Insert(i, " ");
+                    i++;
                 }
             }
 
