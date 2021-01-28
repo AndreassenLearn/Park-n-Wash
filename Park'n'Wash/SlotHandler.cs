@@ -64,10 +64,18 @@ namespace Park_n_Wash
             trailerSlots = GetAvailableSlotsByType(SlotTypes.Trailer);
         }
 
-
+        /// <summary>
+        /// Count electric slots and sort list with electric slots in the end.
+        /// </summary>
+        /// <param name="slots">Slots to count in and sort.</param>
+        /// <returns>Number of electric slots.</returns>
         public int ElectricCountAndSort(List<ISlot> slots)
         {
-            return 0;
+            List<ISlot> electricSlots = slots.Where(x => x.HasCharger).ToList();
+            slots.RemoveAll(x => x.HasCharger);
+            slots.AddRange(electricSlots);
+
+            return electricSlots.Count;
         }
 
         /// <summary>
