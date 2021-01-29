@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash
 {
-    class SlotHandler
+    class SlotController
     {
         private readonly int _normalSlotCount = 50;
         private readonly int _handicapSlotCount = 5;
@@ -27,7 +27,7 @@ namespace Park_n_Wash
             Trailer
         }
 
-        public SlotHandler()
+        public SlotController()
         {
             _slotRepository = new SlotRepository();
             Initialize();

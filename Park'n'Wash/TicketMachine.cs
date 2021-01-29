@@ -9,12 +9,12 @@ namespace Park_n_Wash
 {
     class TicketMachine
     {
-        private SlotHandler _slotHandler;
+        private SlotController _slotController;
         private TicketRepository _ticketRepository;
 
         public TicketMachine()
         {
-            _slotHandler = new SlotHandler();
+            _slotController = new SlotController();
             _ticketRepository = new TicketRepository();
         }
 
@@ -30,11 +30,11 @@ namespace Park_n_Wash
             if (userOption == 0)
             {
                 // Check in.
-                _slotHandler.GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
+                _slotController.GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
 
                 userOption = UserInteraction.SelectOption(
                     new List<string> {
-                        "Regular slots: " + normalSlots.Count + "(" + _slotHandler.ElectricCountAndSort(normalSlots) + " of which offers electric charging)",
+                        "Regular slots: " + normalSlots.Count + " (" + _slotController.ElectricCountAndSort(normalSlots) + " of which offers electric charging)",
                         "Handicap slots: " + handicapSlots.Count,
                         "Large slots (bus/lorry): " + largeSlots.Count,
                         "Trailer slots: " + trailerSlots.Count
