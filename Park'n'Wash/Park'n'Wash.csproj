@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,6 +57,7 @@
     <Compile Include="Slot\NormalSlot.cs" />
     <Compile Include="Slot\Slot.cs" />
     <Compile Include="Slot\TrailerSlot.cs" />
+    <Compile Include="TicketController.cs" />
     <Compile Include="TicketMachine.cs" />
     <Compile Include="TicketRepository.cs" />
     <Compile Include="Ticket\BasicTicket.cs" />
@@ -63,7 +65,7 @@
     <Compile Include="Ticket\ServiceTicket.cs" />
     <Compile Include="Ticket\Ticket.cs" />
     <Compile Include="Ticket\WashTicket.cs" />
-    <Compile Include="UserInteraction.cs" />
+    <Compile Include="UserOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
