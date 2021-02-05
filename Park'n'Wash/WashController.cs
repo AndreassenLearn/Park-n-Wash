@@ -15,6 +15,8 @@ namespace Park_n_Wash
         public WashController()
         {
             _carWashRepository = new CarWashRepository();
+            _washRepository = new WashRepository();
+            _washProcessRepository = new WashProcessRepository();
             Initialize();
         }
 

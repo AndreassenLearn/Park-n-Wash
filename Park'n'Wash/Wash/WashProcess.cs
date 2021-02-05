@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Wash
 {
-    class WashProcess : BusinessEntity, IWashProcess
+    abstract class WashProcess : BusinessEntity, IWashProcess
     {
         public int Id { get; private set; }
 

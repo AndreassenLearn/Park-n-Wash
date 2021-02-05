@@ -17,10 +17,7 @@ namespace Park_n_Wash.Wash
             Id = id;
         }
 
-        public void RunWash(WashTicket ticket, IWash washType)
-        {
 
-        }
 
         public override bool Validate()
         {
