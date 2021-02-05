@@ -12,6 +12,7 @@ namespace Park_n_Wash
     {
         private static SlotController _slotController;
         private static TicketController _ticketController;
+        private static WashController _washController;
 
         public TicketMachine()
         {

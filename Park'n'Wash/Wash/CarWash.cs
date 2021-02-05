@@ -7,13 +7,26 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Wash
 {
-    class CarWash
+    class CarWash : BusinessEntity, IBusinessEntity
     {
+        public int Id { get; private set; }
         public bool IsWashing { get; private set; }
+
+        public CarWash(int id)
+        {
+            Id = id;
+        }
 
         public void RunWash(WashTicket ticket, IWash washType)
         {
 
+        }
+
+        public override bool Validate()
+        {
+            bool isValid = true;
+
+            return isValid;
         }
     }
 }
