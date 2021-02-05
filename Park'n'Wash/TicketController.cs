@@ -38,18 +38,13 @@ namespace Park_n_Wash
         }
 
         /// <summary>
-        /// Get Ticket by ID.
+        /// Get wash ticket by ID.
         /// </summary>
-        /// <param name="id">ID of ticket.</param>
-        /// <returns>Active <see cref="ITicket"/> with ID; otherwise null.</returns>
-        public ITicket GetActiveTicketById(int id)
+        /// <param name="id">ID of wash ticket.</param>
+        /// <returns>Active <see cref="IWashTicket"/> with ID; otherwise null.</returns>
+        public IWashTicket GetUnusedWashTicketById(int id)
         {
-            ITicket ticket = _ticketRepository.GetById(id);
-
-            if (ticket != null && ticket.EntityState.Equals(EntityStateOption.Active))
-                return ticket;
-
-            return null;
+            return _ticketRepository.GetById(id) as IWashTicket; //ticket will be null if it's not an IWashTicket or it doesn't exist.
         }
     }
 }

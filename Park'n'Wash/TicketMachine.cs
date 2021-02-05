@@ -79,9 +79,9 @@ namespace Park_n_Wash
         public static void WashStart()
         {
             int id = UserInteraction.GetInt("Start Wash", "Enter ticket ID");
-            ITicket ticket = _ticketController.GetActiveTicketById(id) as IWashTicket; //ticket will be null if it's not an IWashTicket or it doesn't exist.
+            IWashTicket ticket = _ticketController.GetUnusedWashTicketById(id);
             if (ticket != null)
-            {
+            {        
                 // TODO: Start wash in with an available CarWash.
             }
             else

@@ -47,7 +47,7 @@ namespace Park_n_Wash
         /// <returns><see cref="Ticket"/></returns>
         public ITicket GetById(int id)
         {
-            return _tickets.Where(x => x.Id == id).FirstOrDefault();
+            return _tickets.Where(x => x.Id == id && x.EntityState.Equals(EntityStateOption.Active)).FirstOrDefault();
         }
 
         /// <summary>
