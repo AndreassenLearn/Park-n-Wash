@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Wash
 {
-    interface IWashProcess
+    interface IWashProcess : IBusinessEntity
     {
 
     }

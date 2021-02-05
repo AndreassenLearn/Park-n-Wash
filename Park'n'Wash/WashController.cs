@@ -9,6 +9,8 @@ namespace Park_n_Wash
     class WashController
     {
         private CarWashRepository _carWashRepository;
+        private WashRepository _washRepository;
+        private WashProcessRepository _washProcessRepository;
 
         public WashController()
         {
