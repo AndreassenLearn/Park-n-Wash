@@ -10,8 +10,8 @@ namespace Park_n_Wash
 {
     class TicketMachine
     {
-        private SlotController _slotController;
-        private TicketController _ticketController;
+        private static SlotController _slotController;
+        private static TicketController _ticketController;
 
         public TicketMachine()
         {
@@ -24,51 +24,49 @@ namespace Park_n_Wash
         /// </summary>
         public void RunApplication()
         {
-            Console.WriteLine("Welcome to Park'n'Wash\n");
-
-            int userOption = UserInteraction.SelectOption(new List<string> { "Chech In", "Check Out" });
-
-            if (userOption == 0)
+            while (true)
             {
-                // Check in.
-                _slotController.GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
-
-                //userOption = UserInteraction.SelectOption(
-                //    new List<string> {
-                //        "Regular slots: " + normalSlots.Count + " (" + _slotController.ElectricCountAndSort(normalSlots) + " of which offers electric charging)",
-                //        "Handicap slots: " + handicapSlots.Count,
-                //        "Large slots (bus/lorry): " + largeSlots.Count,
-                //        "Trailer slots: " + trailerSlots.Count
-                //    },
-                //    "Available parking slots");
-
-                UserOption.OptionFunction del = TicketMachine.Test;
+                Console.Clear();
+                Console.WriteLine("Welcome to Park'n'Wash\n");
 
                 UserOption option = (UserOption)UserInteraction.SelectOption(new List<IPrintable>()
                 {
-                    new UserOption("First", new UserOption.OptionFunctionSlot(TicketMachine.TestSlot), normalSlots),
-                    new UserOption("Second", del)
-                },
-                "Title");
+                    new UserOption("Park: Check In", new UserOption.OptionFunction(TicketMachine.ParkCheckIn)),
+                    new UserOption("Park: Check Out", new UserOption.OptionFunction(TicketMachine.ParkCheckOut)),
+                    new UserOption("Wash: Order", new UserOption.OptionFunction(TicketMachine.WashOrder)),
+                    new UserOption("Wash: Start", new UserOption.OptionFunction(TicketMachine.WashStart))
+                });
                 option.Execute();
             }
-            else if (userOption == 1)
-            {
-                // Check out.
-                
-            }
         }
 
-        public static void Test()
+        public static void ParkCheckIn()
         {
-            Console.WriteLine("Test");
-            System.Threading.Thread.Sleep(10000);
+            _slotController.GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
+
+            //UserOption option = (UserOption)UserInteraction.SelectOption(new List<IPrintable>()
+            //{
+            //    new UserOption($"Regular slots: {normalSlots.Count} ({_slotController.ElectricCountAndSort(normalSlots)} of which offers electric charging)", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/)),
+            //    new UserOption($"Handicap slots: {handicapSlots.Count}", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/)),
+            //    new UserOption($"Large slots (bus/lorry): {largeSlots.Count}", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/)),
+            //    new UserOption($"Trailer slots: {trailerSlots.Count}", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/))
+            //}, "Available parking slots");
+            //option.Execute();
         }
 
-        public static void TestSlot(List<ISlot> slots)
+        public static void ParkCheckOut()
         {
-            Console.WriteLine("TestSlot: \n" + slots[0].PrintableString());
-            System.Threading.Thread.Sleep(10000);
+            
+        }
+
+        public static void WashOrder()
+        {
+
+        }
+
+        public static void WashStart()
+        {
+
         }
     }
 }

@@ -16,30 +16,8 @@ namespace Park_n_Wash
         public delegate void OptionFunction();
         public delegate void OptionFunctionSlot(List<ISlot> slot);
 
-        //private Dictionary<PriceFormats, string> _priceFormats = new Dictionary<PriceFormats, string>
-        //{
-        //    { PriceFormats.None, "" },
-        //    { PriceFormats.DKK, "DKK" },
-        //    { PriceFormats.DKKPrHour, "DKK/h" }
-        //};
-
-        /// <summary>
-        /// Defines formats for displaying a price.
-        /// </summary>
-        //public enum PriceFormats
-        //{
-        //    None,
-        //    DKK,
-        //    DKKPrHour
-        //}
-
         public string Text { get; set; }
         private List<ISlot> Slots { get; set; }
-        //public string SecondText { get; set; }
-        //public int? Availability { get; set; }
-        //public int? SecondAvailability { get; set; }
-        //public double? Price { get; set; }
-        //public PriceFormats PriceFormat { get; set; }
 
         private UserOption(string text)
         {
@@ -55,16 +33,6 @@ namespace Park_n_Wash
             Slots = slots;
         }
 
-        //public UserOption(string text, double? price = null, PriceFormats priceFormat = PriceFormats.None, int? availability = null, string secondText = "", int? secondAvailablity = null)
-        //{
-        //    Text = text;
-        //    Price = price;
-        //    PriceFormat = priceFormat;
-        //    Availability = availability;
-        //    SecondText = secondText;
-        //    SecondAvailability = secondAvailablity;
-        //}
-
         public void Execute()
         {
             if (_optionFunction != null)
@@ -75,6 +43,5 @@ namespace Park_n_Wash
 
         public string PrintableString() =>
             Text;
-            //$"{Text}{(Availability != null ? ": " + Availability : "")}{(SecondText != "" ? " (" + SecondText + (SecondAvailability != null ? ": " + SecondAvailability : "") + ")" : "" )}{(Price != null ? " - " + String.Format("{0:0.00}", Price) + " " + _priceFormats[PriceFormat] : "")}";
     }
 }
