@@ -66,6 +66,9 @@
     <Compile Include="Ticket\Ticket.cs" />
     <Compile Include="Ticket\WashTicket.cs" />
     <Compile Include="UserOption.cs" />
+    <Compile Include="Wash\CarWash.cs" />
+    <Compile Include="Wash\IWash.cs" />
+    <Compile Include="Wash\IWashProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
