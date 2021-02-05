@@ -66,7 +66,7 @@ namespace Park_n_Wash
         public static void WashOrder()
         {
             List<IPrintable> options = new List<IPrintable>();
-            int nextId = _ticketController.NextId();
+            int nextId = _ticketController.GetNextId();
             foreach (IWash wash in _washController.GetWashes())
             {
                 options.Add(new UserOption($"{wash.Name} - {wash.Price} kr.", new UserOption.OptionFunctionTicket(TicketMachine.RegisterNewTicket), new WashTicket(nextId, wash)));
@@ -78,7 +78,16 @@ namespace Park_n_Wash
 
         public static void WashStart()
         {
-
+            int id = UserInteraction.GetInt("Start Wash", "Enter ticket ID");
+            ITicket ticket = _ticketController.GetActiveTicketById(id) as IWashTicket; //ticket will be null if it's not an IWashTicket or it doesn't exist.
+            if (ticket != null)
+            {
+                // TODO: Start wash in with an available CarWash.
+            }
+            else
+            {
+                Console.WriteLine("Invalid ID.");
+            }
         }
 
         public static void RegisterNewTicket(ITicket ticket)
