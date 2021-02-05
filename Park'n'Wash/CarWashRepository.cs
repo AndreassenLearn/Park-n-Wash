@@ -20,10 +20,15 @@ namespace Park_n_Wash
         /// Add car wash to repository.
         /// </summary>
         /// <param name="carWash"><see cref="CarWash"/> to insert.</param>
-        public void Insert(CarWash carWash)
+        public bool Insert(CarWash carWash)
         {
             if (carWash.IsValid)
+            {
                 _carWashes.Add(carWash);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

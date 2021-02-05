@@ -20,10 +20,15 @@ namespace Park_n_Wash
         /// Add wash to repository.
         /// </summary>
         /// <param name="wash"><see cref="IWash"/> to insert.</param>
-        public void Insert(IWash wash)
+        public bool Insert(IWash wash)
         {
             if (wash.IsValid)
+            {
                 _washes.Add(wash);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

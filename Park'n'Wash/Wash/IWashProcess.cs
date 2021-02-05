@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Wash
 {
-    interface IWashProcess : IBusinessEntity
+    public interface IWashProcess : IBusinessEntity
     {
-
+        public string Name { get; }
+        public TimeSpan Duration { get; }
     }
 }

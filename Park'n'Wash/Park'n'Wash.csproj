@@ -61,9 +61,11 @@
     <Compile Include="TicketMachine.cs" />
     <Compile Include="TicketRepository.cs" />
     <Compile Include="Ticket\BasicTicket.cs" />
+    <Compile Include="Ticket\ISlotTicket.cs" />
     <Compile Include="Ticket\ITicket.cs" />
+    <Compile Include="Ticket\IWashTicket.cs" />
     <Compile Include="Ticket\ServiceTicket.cs" />
-    <Compile Include="Ticket\Ticket.cs" />
+    <Compile Include="Ticket\SlotTicket.cs" />
     <Compile Include="Ticket\WashTicket.cs" />
     <Compile Include="UserOption.cs" />
     <Compile Include="WashController.cs" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Ticket
 {
-    class ServiceTicket : Ticket
+    class ServiceTicket : SlotTicket
     {
         private double _servicePrice = 479.99;
 

@@ -1,5 +1,7 @@
 ﻿using Park_n_Wash.Common;
 using Park_n_Wash.Slot;
+using Park_n_Wash.Ticket;
+using Park_n_Wash.Wash;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,7 @@ namespace Park_n_Wash
         {
             _slotController = new SlotController();
             _ticketController = new TicketController();
+            _washController = new WashController();
         }
 
         /// <summary>
@@ -27,7 +30,7 @@ namespace Park_n_Wash
         {
             while (true)
             {
-                Console.Clear();
+                ConsoleService.Clear();
                 Console.WriteLine("Welcome to Park'n'Wash\n");
 
                 UserOption option = (UserOption)UserInteraction.SelectOption(new List<IPrintable>()
@@ -62,12 +65,27 @@ namespace Park_n_Wash
 
         public static void WashOrder()
         {
-
+            List<IPrintable> options = new List<IPrintable>();
+            int nextId = _ticketController.NextId();
+            foreach (IWash wash in _washController.GetWashes())
+            {
+                options.Add(new UserOption($"{wash.Name} - {wash.Price} kr.", new UserOption.OptionFunctionTicket(TicketMachine.RegisterNewTicket), new WashTicket(nextId, wash)));
+            }
+            
+            UserOption option = (UserOption)UserInteraction.SelectOption(options, "Choose wash type");
+            option.Execute();
         }
 
         public static void WashStart()
         {
 
+        }
+
+        public static void RegisterNewTicket(ITicket ticket)
+        {
+            _ticketController.AddTicket(ticket);
+
+            (ticket as IPrintable).PrintToConsole();
         }
     }
 }
