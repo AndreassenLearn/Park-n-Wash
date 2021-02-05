@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Park_n_Wash
+namespace Park_n_Wash.Common
 {
-    class UserInteraction
+    public class UserInteraction
     {
         /// <summary>
         /// Get int value from user, in given interval. Retry until a valid value has been entered.
@@ -65,6 +65,23 @@ namespace Park_n_Wash
             }
 
             return GetInt(1, options.Count) - 1;
+        }
+
+        /// <summary>
+        /// Let user choose between multiple numbered options.
+        /// </summary>
+        /// <param name="options">List of options to choose from.</param>
+        /// <param name="title">Title displayed above options.</param>
+        /// <returns>Option chosen by index.</returns>
+        static public IPrintable SelectOption(List<IPrintable> options, string title = "Choose one")
+        {
+            Console.WriteLine("##### " + title + " #####");
+            for (int i = 1; i <= options.Count; i++)
+            {
+                Console.WriteLine(i + ". " + options[i - 1].PrintableString());
+            }
+
+            return options[GetInt(1, options.Count) - 1];
         }
 
         /// <summary>
