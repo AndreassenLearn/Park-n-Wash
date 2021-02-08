@@ -53,7 +53,7 @@ namespace Park_n_Wash.Wash
                 TimeSpan totalDuration = new TimeSpan();
                 foreach (IWashProcess washProcess in wash.WashProcesses)
                 {
-                    totalDuration.Add(washProcess.Duration);
+                    totalDuration = totalDuration.Add(washProcess.Duration);
                 }
                 FinishAt = DateTime.Now.Add(totalDuration);
 

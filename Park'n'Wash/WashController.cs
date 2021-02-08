@@ -3,6 +3,7 @@ using Park_n_Wash.Ticket;
 using Park_n_Wash.Wash;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -12,6 +13,10 @@ namespace Park_n_Wash
 {
     class WashController
     {
+        private string _logFileName = "log_CarWash";
+        private string _logFileExtension = ".csv";
+        private string _logDelimiter = ";";
+        
         private CarWashRepository _carWashRepository;
         private WashProcessRepository _washProcessRepository;
         private WashRepository _washRepository;
@@ -70,6 +75,7 @@ namespace Park_n_Wash
                 washTicket.HasWashed = false;
                 Console.WriteLine($"{washTicket.Wash.Name} in car wash #{carWashToQueue.Id} has stopped.");
             }, TaskContinuationOptions.OnlyOnCanceled);
+            Task writeLogTask = carWashTask.ContinueWith((ant) => WriteLog(carWashToQueue, washTicket, ant.Status));
 
             carWashTask.Start();
 
@@ -131,6 +137,26 @@ namespace Park_n_Wash
         public List<IWash> GetWashes()
         {
             return _washRepository.GetAll().ToList();
+        }
+
+        // General
+        private void WriteLog(CarWash carWash, IWashTicket washTicket, TaskStatus washStatus)
+        {
+            string logFilePath = _logFileName + carWash.Id + _logFileExtension;
+            
+            StringBuilder stringBuilder = new StringBuilder();
+
+            // If file doesn't exists; add headers.
+            if (!File.Exists(logFilePath))
+            {
+                string[] headers = new string[] { "Time", "CarWash ID", "Ticket ID", "Wash ID", "Wash name", "Estimated finish time", "Wash status" };
+                stringBuilder.AppendLine(string.Join(_logDelimiter, headers));
+            }
+
+            string[] content = new string[] { DateTime.Now.ToString(), carWash.Id.ToString(), washTicket.Id.ToString(), washTicket.Wash.Id.ToString(), washTicket.Wash.Name, carWash.FinishAt.ToString(), washStatus.ToString() };
+            stringBuilder.AppendLine(string.Join(_logDelimiter, content));
+
+            File.AppendAllText(logFilePath, stringBuilder.ToString());
         }
 
         /// <summary>
