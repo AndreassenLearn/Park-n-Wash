@@ -1,4 +1,5 @@
-﻿using Park_n_Wash.Ticket;
+﻿using Park_n_Wash.Common;
+using Park_n_Wash.Ticket;
 using Park_n_Wash.Wash;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,21 @@ namespace Park_n_Wash
             _washRepository = new WashRepository();
             _washProcessRepository = new WashProcessRepository();
             Initialize();
+        }
+
+        /// <summary>
+        /// Get all car washes as <see cref="IPrintable"/>.
+        /// </summary>
+        /// <returns>List of <see cref="IPrintable"/>.</returns>
+        public List<IPrintable> GetPrintableCarWashes()
+        {
+            List<IPrintable> printables = new List<IPrintable>();
+            foreach (CarWash carWash in _carWashRepository.GetAll().ToList())
+            {
+                printables.Add(carWash);
+            }
+
+            return printables;
         }
 
         /// <summary>

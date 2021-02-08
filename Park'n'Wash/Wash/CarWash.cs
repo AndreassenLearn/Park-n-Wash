@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Park_n_Wash.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,18 +8,21 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Wash
 {
-    class CarWash : BusinessEntity, IBusinessEntity
+    class CarWash : BusinessEntity, IBusinessEntity, IPrintable
     {
         private int _queueCount = 0;
         
         public int Id { get; private set; }
-        public bool IsRunning { get; private set; }
+        public bool IsRunning
+        {
+            get { return CurrentWashProcess != null; }
+        }
         public DateTime FinishAt { get; private set; }
+        public IWashProcess CurrentWashProcess { get; private set; }
 
         public CarWash(int id)
         {
             Id = id;
-            IsRunning = false;
             FinishAt = DateTime.Now;
         }
 
@@ -56,8 +60,10 @@ namespace Park_n_Wash.Wash
                 // Run wash.
                 foreach (IWashProcess washProcess in wash.WashProcesses)
                 {
+                    CurrentWashProcess = washProcess;
                     washProcess.Run(Id, token);
                 }
+                CurrentWashProcess = null;
 
                 Console.WriteLine($"{wash.Name} in car wash #{Id} has finished.");
             }
@@ -69,6 +75,9 @@ namespace Park_n_Wash.Wash
                 }
             }
         }
+
+        public string PrintableString() =>
+            $"ID: {Id}, Is running: {(IsRunning ? $"Y, Finished at: {FinishAt}, Current process: {(CurrentWashProcess != null ? CurrentWashProcess.Name : "N/A")}" : "N")}";
 
         public override bool Validate()
         {
