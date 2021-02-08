@@ -140,6 +140,12 @@ namespace Park_n_Wash
         }
 
         // General
+        /// <summary>
+        /// Write log with ID's, status, and time information.
+        /// </summary>
+        /// <param name="carWash"><see cref="CarWash"/> to log.</param>
+        /// <param name="washTicket"><see cref="IWashTicket"/> used for <see cref="CarWash"/>.</param>
+        /// <param name="washStatus"><see cref="TaskStatus"/> from <see cref="Task"/> running car wash.</param>
         private void WriteLog(CarWash carWash, IWashTicket washTicket, TaskStatus washStatus)
         {
             string logFilePath = _logFileName + carWash.Id + _logFileExtension;
