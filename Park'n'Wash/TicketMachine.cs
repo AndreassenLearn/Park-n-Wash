@@ -38,7 +38,8 @@ namespace Park_n_Wash
                     new UserOption("Park: Check In", new UserOption.OptionFunction(TicketMachine.ParkCheckIn)),
                     new UserOption("Park: Check Out", new UserOption.OptionFunction(TicketMachine.ParkCheckOut)),
                     new UserOption("Wash: Order", new UserOption.OptionFunction(TicketMachine.WashOrder)),
-                    new UserOption("Wash: Start", new UserOption.OptionFunction(TicketMachine.WashStart))
+                    new UserOption("Wash: Start", new UserOption.OptionFunction(TicketMachine.WashStart)),
+                    new UserOption("Wash: Cancel", new UserOption.OptionFunction(TicketMachine.WashCancel))
                 });
                 option.Execute();
             }
@@ -81,13 +82,21 @@ namespace Park_n_Wash
             int id = UserInteraction.GetInt("Start Wash", "Enter ticket ID");
             IWashTicket ticket = _ticketController.GetUnusedWashTicketById(id);
             if (ticket != null)
-            {        
-                // TODO: Start wash in with an available CarWash.
+            {
+                if (!_washController.StartCarWash(ticket))
+                    Console.WriteLine("Unable to start wash. Has this ticket has already been used?");
             }
             else
             {
                 Console.WriteLine("Invalid ID.");
             }
+        }
+
+        public static void WashCancel()
+        {
+            int id = UserInteraction.GetInt("Cancel Wash", "Enter car wash number");
+            if (!_washController.CancelCarWash(id))
+                Console.WriteLine($"Unable to cancel. Is the car wash #{id} running?");
         }
 
         public static void RegisterNewTicket(ITicket ticket)

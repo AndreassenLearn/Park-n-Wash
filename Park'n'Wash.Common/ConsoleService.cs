@@ -48,7 +48,7 @@ namespace Park_n_Wash.Common
         /// </summary>
         public static void Clear()
         {
-            Console.Clear();
+            //Console.Clear();
         }
     }
 }

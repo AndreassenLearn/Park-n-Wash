@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Park_n_Wash.Wash
@@ -10,5 +11,7 @@ namespace Park_n_Wash.Wash
     {
         public string Name { get; }
         public TimeSpan Duration { get; }
+
+        public void Run(int carWashId, CancellationToken token);
     }
 }
