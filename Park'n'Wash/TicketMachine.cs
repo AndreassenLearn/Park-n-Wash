@@ -81,6 +81,12 @@ namespace Park_n_Wash
 
         public static void ParkOrder(List<ISlot> slots)
         {
+            if (slots != null && slots.Count > 0)
+            {
+                Console.WriteLine("Sorry, there's no more free spots of the desired type.");
+                return;
+            }
+            
             bool electric = false;
             if (slots.Any(x => x.HasCharger == true))
                 electric = UserInteraction.YesNo("Electric charging (FREE)");

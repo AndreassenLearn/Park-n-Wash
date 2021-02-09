@@ -127,14 +127,6 @@ namespace Park_n_Wash.Common
         /// <summary>
         /// Print a message to the console.
         /// </summary>
-        static public void NoFreeSpots()
-        {
-            Console.WriteLine("Sorry, but there's no more free spots of the desired type.");
-        }
-
-        /// <summary>
-        /// Print a message to the console.
-        /// </summary>
         static private void InvalidValue()
         {
             Console.Write("Invalid input, try again: ");
