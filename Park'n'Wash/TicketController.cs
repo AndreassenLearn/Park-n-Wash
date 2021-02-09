@@ -48,6 +48,12 @@ namespace Park_n_Wash
             return false;
         }
 
+        public void CheckOutSlotTicket(ISlotTicket ticket, SlotController slotController)
+        {
+            ticket.CheckOut(slotController);
+            _ticketRepository.Update(ticket);
+        }
+
         /// <summary>
         /// Add new ticket.
         /// </summary>
@@ -68,13 +74,23 @@ namespace Park_n_Wash
         }
 
         /// <summary>
-        /// Get wash ticket by ID.
+        /// Get <see cref="IWashTicket"/> by ID.
         /// </summary>
-        /// <param name="id">ID of wash ticket.</param>
-        /// <returns>Active <see cref="IWashTicket"/> with ID; otherwise null.</returns>
-        public IWashTicket GetUnusedWashTicketById(int id)
+        /// <param name="id">ID of <see cref="IWashTicket"/>.</param>
+        /// <returns><see cref="IWashTicket"/> with ID; otherwise null.</returns>
+        public IWashTicket GetWashTicketById(int id)
         {
             return _ticketRepository.GetById(id) as IWashTicket; //ticket will be null if it's not an IWashTicket or it doesn't exist.
+        }
+
+        /// <summary>
+        /// Get <see cref="ISlotTicket"/> by ID.
+        /// </summary>
+        /// <param name="id">ID of <see cref="ISlotTicket"/>.</param>
+        /// <returns><see cref="ISlotTicket"/> with ID; otherwise null.</returns>
+        public ISlotTicket GetSlotTicketById(int id)
+        {
+            return _ticketRepository.GetById(id) as ISlotTicket;
         }
     }
 }

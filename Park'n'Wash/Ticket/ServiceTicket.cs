@@ -19,10 +19,17 @@ namespace Park_n_Wash.Ticket
             Price += _servicePrice;
         }
 
-        public override void CheckOut()
+        /// <summary>
+        /// Check out ticket only if service is done.
+        /// </summary>
+        /// <param name="slotController"><see cref="SlotController"/> to free parking slot.</param>
+        /// <returns>True if successful; otherwise false.</returns>
+        public override bool CheckOut(SlotController slotController)
         {
             if (ServiceDone)
-                base.CheckOut();
+                return base.CheckOut(slotController);
+
+            return false;
         }
     }
 }

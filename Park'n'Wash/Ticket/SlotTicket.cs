@@ -28,19 +28,27 @@ namespace Park_n_Wash.Ticket
         }
 
         /// <summary>
-        /// Calculate price, free parking slot, and mark as deleted.
+        /// Calculate price, free parking slot, mark as deleted, and validate.
         /// </summary>
-        public virtual void CheckOut()
+        /// <param name="slotController"><see cref="SlotController"/> to free parking slot.</param>
+        /// <returns>True if successful; otherwise false.</returns>
+        public virtual bool CheckOut(SlotController slotController)
         {
+            bool success = true;
+            
             // Calculate price.
             EndTime = DateTime.Now;
             TotalHours = (EndTime.Value - StartTime).TotalHours;
             Price += ParkingSlot.PricePrHour * TotalHours;
 
-            // TODO: Free parking slot.
+            // Free parking slot.
+            success &= slotController.Free(ParkingSlot);
 
             // Mark ticket as deleted.
             EntityState = EntityStateOption.Deleted;
+
+            // Validate.
+            return success &= Validate();
         }
 
         public string PrintableString() =>

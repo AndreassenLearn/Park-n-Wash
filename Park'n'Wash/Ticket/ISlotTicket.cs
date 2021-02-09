@@ -15,6 +15,6 @@ namespace Park_n_Wash.Ticket
         public ISlot ParkingSlot { get; }
         public bool Electric { get; }
 
-        public void CheckOut();
+        public bool CheckOut(SlotController slotController);
     }
 }

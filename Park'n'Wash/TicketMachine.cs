@@ -66,7 +66,17 @@ namespace Park_n_Wash
 
         public static void ParkCheckOut()
         {
-            
+            int id = UserInteraction.GetInt("Check Out", "Enter ticket ID");
+            ISlotTicket ticket = _ticketController.GetSlotTicketById(id);
+            if (ticket != null)
+            {
+                _ticketController.CheckOutSlotTicket(ticket, _slotController);
+                Console.WriteLine("Successful checkout.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid ID.");
+            }
         }
 
         public static void ParkOrder(List<ISlot> slots)
@@ -104,7 +114,7 @@ namespace Park_n_Wash
         public static void WashStart()
         {
             int id = UserInteraction.GetInt("Start Wash", "Enter ticket ID");
-            IWashTicket ticket = _ticketController.GetUnusedWashTicketById(id);
+            IWashTicket ticket = _ticketController.GetWashTicketById(id);
             if (ticket != null)
             {
                 if (!_washController.StartCarWash(ticket))

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash
 {
-    class SlotController
+    public class SlotController
     {
         private readonly int _normalSlotCount = 50;
         private readonly int _handicapSlotCount = 5;
@@ -92,6 +92,17 @@ namespace Park_n_Wash
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Set <see cref="ISlot.IsFree"/> to free.
+        /// </summary>
+        /// <param name="slot"><see cref="ISlot"/> to modify.</param>
+        /// <returns>True if successful; otherwise false.</returns>
+        public bool Free(ISlot slot)
+        {
+            slot.IsFree = true;
+            return _slotRepository.Update(slot);
         }
 
         /// <summary>
