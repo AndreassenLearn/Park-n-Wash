@@ -139,6 +139,7 @@ UserOption contains a contructor for each supported template and it's parameters
 ### v0.2.0
 * Added car wash functionality.
 * Added missing bits in parking functionality.
+* Logging of car washes.
 * Updated ClassDiagram.cd.
 * Added README.md.
 ### v0.1.0
