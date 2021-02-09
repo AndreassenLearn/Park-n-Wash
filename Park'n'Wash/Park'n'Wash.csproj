@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,14 +57,26 @@
     <Compile Include="Slot\NormalSlot.cs" />
     <Compile Include="Slot\Slot.cs" />
     <Compile Include="Slot\TrailerSlot.cs" />
+    <Compile Include="TicketController.cs" />
     <Compile Include="TicketMachine.cs" />
     <Compile Include="TicketRepository.cs" />
     <Compile Include="Ticket\BasicTicket.cs" />
+    <Compile Include="Ticket\ISlotTicket.cs" />
     <Compile Include="Ticket\ITicket.cs" />
+    <Compile Include="Ticket\IWashTicket.cs" />
     <Compile Include="Ticket\ServiceTicket.cs" />
-    <Compile Include="Ticket\Ticket.cs" />
+    <Compile Include="Ticket\SlotTicket.cs" />
     <Compile Include="Ticket\WashTicket.cs" />
-    <Compile Include="UserInteraction.cs" />
+    <Compile Include="UserOption.cs" />
+    <Compile Include="WashController.cs" />
+    <Compile Include="CarWashRepository.cs" />
+    <Compile Include="WashProcessRepository.cs" />
+    <Compile Include="WashRepository.cs" />
+    <Compile Include="Wash\CarWash.cs" />
+    <Compile Include="Wash\IWash.cs" />
+    <Compile Include="Wash\IWashProcess.cs" />
+    <Compile Include="Wash\Wash.cs" />
+    <Compile Include="Wash\WashProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

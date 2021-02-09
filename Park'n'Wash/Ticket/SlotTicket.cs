@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Ticket
 {
-    public abstract class Ticket : BusinessEntity, ITicket
+    public abstract class SlotTicket : BusinessEntity, ISlotTicket
     {
         public int Id { get; }
         public DateTime StartTime { get; }
@@ -17,7 +17,7 @@ namespace Park_n_Wash.Ticket
         public bool Electric { get; }
         public double Price { get; protected set; }
 
-        public Ticket(int ticketId, ISlot parkingSlot, bool includeCharging = false)
+        public SlotTicket(int ticketId, ISlot parkingSlot, bool includeCharging = false)
         {
             Id = ticketId;
             StartTime = DateTime.Now;
@@ -28,30 +28,38 @@ namespace Park_n_Wash.Ticket
         }
 
         /// <summary>
-        /// Calculate price, free parking slot, and mark as deleted.
+        /// Calculate price, free parking slot, mark as deleted, and validate.
         /// </summary>
-        public virtual void CheckOut()
+        /// <param name="slotController"><see cref="SlotController"/> to free parking slot.</param>
+        /// <returns>True if successful; otherwise false.</returns>
+        public virtual bool CheckOut(SlotController slotController)
         {
+            bool success = true;
+            
             // Calculate price.
             EndTime = DateTime.Now;
             TotalHours = (EndTime.Value - StartTime).TotalHours;
             Price += ParkingSlot.PricePrHour * TotalHours;
 
-            // TODO: Free parking slot.
+            // Free parking slot.
+            success &= slotController.Free(ParkingSlot);
 
             // Mark ticket as deleted.
             EntityState = EntityStateOption.Deleted;
+
+            // Validate.
+            return success &= Validate();
         }
 
         public string PrintableString() =>
             $"# ##\n" +
-            $"# ##  Ticket: {Id} Slot: {ParkingSlot.Id}\n" +
+            $"# ##  Ticket: {Id} - Slot: {ParkingSlot.Id}\n" +
             $"# ##\n" +
-            $"# ##  Start Time: {StartTime} End Time: {(EndTime.HasValue ? EndTime.Value.ToString() : "N/A")}\n" +
-            $"# ##  Total hours: {TotalHours}\n" +
+            $"# ##  Start Time: {StartTime} - End Time: {(EndTime.HasValue ? EndTime.Value.ToString() : "N/A")}\n" +
+            $"# ##  Total hours: {Math.Round(TotalHours, 3)}\n" +
             $"# ##  Charging: {(Electric? "Y" : "N")}\n" +
             $"# ##\n" +
-            $"# ##  Price: {Price} kr.\n" +
+            $"# ##  Price: {Math.Round(Price, 2)} kr.\n" +
             $"# ##\n\n";
 
         public override bool Validate()
@@ -60,7 +68,7 @@ namespace Park_n_Wash.Ticket
 
             if (StartTime == null) isValid = false;
             if (ParkingSlot == null) isValid = false;
-            if (!(Electric && ParkingSlot.HasCharger)) isValid = false;
+            if (Electric && !ParkingSlot.HasCharger) isValid = false;
             if (Price < 0) isValid = false;
 
             return isValid;

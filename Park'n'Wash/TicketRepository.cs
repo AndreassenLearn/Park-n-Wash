@@ -15,15 +15,20 @@ namespace Park_n_Wash
         {
             _tickets = new List<ITicket>();
         }
-
+        
         /// <summary>
         /// Add ticket to repository.
         /// </summary>
         /// <param name="ticket"><see cref="Ticket"/> to insert.</param>
-        public void Insert(ITicket ticket)
+        public bool Insert(ITicket ticket)
         {
             if (ticket.IsValid)
+            {
                 _tickets.Add(ticket);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -42,20 +47,25 @@ namespace Park_n_Wash
         /// <returns><see cref="Ticket"/></returns>
         public ITicket GetById(int id)
         {
-            return _tickets.Where(x => x.Id == id).FirstOrDefault();
+            return _tickets.Where(x => x.Id == id && x.EntityState.Equals(EntityStateOption.Active)).FirstOrDefault();
         }
 
         /// <summary>
         /// Update existing ticket in repository. If it doesn't exist; insert it.
         /// </summary>
         /// <param name="ticket"><see cref="Ticket"/> to update (or insert).</param>
-        public void Update(ITicket ticket)
+        public bool Update(ITicket ticket)
         {
             ITicket ticketToUpdate = _tickets.Where(x => x.Id == ticket.Id).FirstOrDefault();
             if (ticketToUpdate != null && ticket.IsValid)
+            {
                 ticketToUpdate = ticket;
+                return true;
+            }
             else
-                Insert(ticket);
+            {
+                return Insert(ticket);
+            }
         }
 
         /// <summary>

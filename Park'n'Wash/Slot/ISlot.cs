@@ -9,7 +9,7 @@ namespace Park_n_Wash.Slot
 {
     public interface ISlot : IBusinessEntity, IPrintable
     {
-        bool IsFree { get; }
+        bool IsFree { get; set; }
         double PricePrHour { get; }
         bool HasCharger { get; }
     }

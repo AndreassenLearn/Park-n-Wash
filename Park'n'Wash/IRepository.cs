@@ -12,7 +12,7 @@ namespace Park_n_Wash
         /// Insert <see cref="T"/> into repository.
         /// </summary>
         /// <param name="t">Object to insert.</param>
-        void Insert(T t);
+        bool Insert(T t);
 
         /// <summary>
         /// Get enumerable of <see cref="T"/>.
@@ -31,7 +31,7 @@ namespace Park_n_Wash
         /// Update <see cref="T"/> in repository.
         /// </summary>
         /// <param name="t">Object to update.</param>
-        void Update(T t);
+        bool Update(T t);
 
         /// <summary>
         /// Delete <see cref="T"/> with given id.
