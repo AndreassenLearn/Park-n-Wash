@@ -117,6 +117,9 @@ To update the statistics for a car wash, the update option must be used and the 
 Generating statistics for car wash #0 now.
 ```
 
+## Logging
+In the same directory where the Park'n'Wash executable is located, log files for car washes will be created/updated after each wash. These are used to create the statistics for the car washes, but also privides extra information not currently used in the statistics, like finish state and time. The log files will be named like so; `log_CarWash0.csv`, where the number after "CarWash" is the ID of the car wash.
+
 ## Technical Implementation
 ### Classes
 A class diagram called 'ClassDiagram.cd' can be found in the project folder; 'Park'n'Wash'.
@@ -133,5 +136,10 @@ UserOption contains a contructor for each supported template and it's parameters
 * Wether service is included is not shown on parking ticket.
 
 ## Versioning
+### v0.2.0
+* Added car wash functionality.
+* Added missing bits in parking functionality.
+* Updated ClassDiagram.cd.
+* Added README.md.
 ### v0.1.0
 * Early pre-release.
