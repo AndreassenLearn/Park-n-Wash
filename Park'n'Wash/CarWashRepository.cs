@@ -54,13 +54,18 @@ namespace Park_n_Wash
         /// Update existing car wash in repository. If it doesn't exist; insert it.
         /// </summary>
         /// <param name="carWash"><see cref="CarWash"/> to update (or insert).</param>
-        public void Update(CarWash carWash)
+        public bool Update(CarWash carWash)
         {
             CarWash carWashToUpdate = _carWashes.Where(x => x.Id == carWash.Id).FirstOrDefault();
             if (carWashToUpdate != null && carWash.IsValid)
+            {
                 carWashToUpdate = carWash;
+                return true;
+            }
             else
-                Insert(carWash);
+            {
+                return Insert(carWash);
+            }
         }
 
         /// <summary>

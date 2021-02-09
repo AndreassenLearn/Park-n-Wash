@@ -83,26 +83,6 @@
       <Field Name="_ticketMachine" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Park_n_Wash.SlotController">
-    <Position X="27.25" Y="4.5" Width="2" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Enum Name="Park_n_Wash.SlotController.SlotTypes" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>SlotController.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>AEgAAAAAAAAAARACAAAAAQAAAAAAAAAAAAAACAQAABA=</HashCode>
-      <FileName>SlotController.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_slotRepository" />
-    </ShowAsAssociation>
-  </Class>
   <Class Name="Park_n_Wash.SlotRepository" BaseTypeListCollapsed="true">
     <Position X="31" Y="5" Width="1.5" />
     <TypeIdentifier>
@@ -114,12 +94,11 @@
   <Class Name="Park_n_Wash.TicketMachine">
     <Position X="23.5" Y="2" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAIAAAIQEAAQAIAAAAAAABBQAAEAAAAAAAAMAIAAgEA=</HashCode>
+      <HashCode>AAIAAAIQEAAQAIAAAQAAABBQAAEAAAAAAAAMAIAAgEA=</HashCode>
       <FileName>TicketMachine.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="_ticketController" />
-      <Field Name="_slotController" />
       <Field Name="_washController" />
     </ShowAsAssociation>
   </Class>
@@ -194,7 +173,7 @@
   <Class Name="Park_n_Wash.TicketController">
     <Position X="27.25" Y="2" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAgAABAAAAAQABAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAABAAAAAQABAAQAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>TicketController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -230,6 +209,26 @@
       <FileName>UserOption.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Park_n_Wash.SlotController">
+    <Position X="27.25" Y="4.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Park_n_Wash.SlotController.SlotTypes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SlotController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AEgAAAAAAAAAARACAAAAAQAAAAAAAAAAAAAACAQACBA=</HashCode>
+      <FileName>SlotController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_slotRepository" />
+    </ShowAsAssociation>
   </Class>
   <Interface Name="Park_n_Wash.Slot.ISlot">
     <Position X="14.5" Y="3.5" Width="1.5" />

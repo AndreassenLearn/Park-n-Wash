@@ -1,4 +1,5 @@
-﻿using Park_n_Wash.Ticket;
+﻿using Park_n_Wash.Slot;
+using Park_n_Wash.Ticket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,35 @@ namespace Park_n_Wash
         {
             _ticketRepository = new TicketRepository();
             _newTicketId = 0;
+        }
+
+        /// <summary>
+        /// Create <see cref="ITicket"/> for free <see cref="ISlot"/>.
+        /// </summary>
+        /// <param name="slot"><see cref="ISlot"/> to occupy.</param>
+        /// <param name="electric">Weather to include electric charging.</param>
+        /// <param name="service">Weather to inlcude service.</param>
+        /// <param name="ticket"><see cref="ITicket"/> ready to be registered.</param>
+        /// <param name="_slotController"><see cref="SlotController"/> to occupy <see cref="ISlot"/>.</param>
+        /// <returns>True if ticket was successfully created; otherwise false (and <see cref="ITicket"/> will be null).</returns>
+        public bool NewSlotTicket(ISlot slot, bool electric, bool service, out ITicket ticket, SlotController _slotController)
+        {
+            ticket = null;
+
+            if (electric && !slot.HasCharger)
+                return false;
+
+            if (_slotController.OccupyIfFree(slot))
+            {
+                if (service)
+                    ticket = new ServiceTicket(GetNextId(), slot, electric);
+                else
+                    ticket = new BasicTicket(GetNextId(), slot, electric);
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

@@ -54,13 +54,18 @@ namespace Park_n_Wash
         /// Update existing wash process in repository. If it doesn't exist; insert it.
         /// </summary>
         /// <param name="wash"><see cref="IWashProcess"/> to update (or insert).</param>
-        public void Update(IWashProcess washProcess)
+        public bool Update(IWashProcess washProcess)
         {
             IWashProcess washProcessToUpdate = _washProcesses.Where(x => x.Id == washProcess.Id).FirstOrDefault();
             if (washProcessToUpdate != null && washProcess.IsValid)
+            {
                 washProcessToUpdate = washProcess;
+                return true;
+            }
             else
-                Insert(washProcess);
+            {
+                return Insert(washProcess);
+            }
         }
 
         /// <summary>

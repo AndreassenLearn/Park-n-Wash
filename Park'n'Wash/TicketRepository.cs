@@ -54,13 +54,18 @@ namespace Park_n_Wash
         /// Update existing ticket in repository. If it doesn't exist; insert it.
         /// </summary>
         /// <param name="ticket"><see cref="Ticket"/> to update (or insert).</param>
-        public void Update(ITicket ticket)
+        public bool Update(ITicket ticket)
         {
             ITicket ticketToUpdate = _tickets.Where(x => x.Id == ticket.Id).FirstOrDefault();
             if (ticketToUpdate != null && ticket.IsValid)
+            {
                 ticketToUpdate = ticket;
+                return true;
+            }
             else
-                Insert(ticket);
+            {
+                return Insert(ticket);
+            }
         }
 
         /// <summary>

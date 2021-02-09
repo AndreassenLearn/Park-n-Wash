@@ -13,7 +13,7 @@ namespace Park_n_Wash.Ticket
 
         public bool ServiceDone { get; set; }
 
-        public ServiceTicket(int ticketId, ISlot parkingSlot) : base(ticketId, parkingSlot)
+        public ServiceTicket(int ticketId, ISlot parkingSlot, bool includeCharging) : base(ticketId, parkingSlot, includeCharging)
         {
             ServiceDone = false;
             Price += _servicePrice;

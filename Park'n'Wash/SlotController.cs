@@ -79,6 +79,22 @@ namespace Park_n_Wash
         }
 
         /// <summary>
+        /// Set <see cref="ISlot.IsFree"/> to false if slot is free.
+        /// </summary>
+        /// <param name="slot"><see cref="ISlot"/> to modify.</param>
+        /// <returns>True if successful; otherwise false.</returns>
+        public bool OccupyIfFree(ISlot slot)
+        {
+            if (_slotRepository.GetById(slot.Id).IsFree)
+            {
+                slot.IsFree = false;
+                return _slotRepository.Update(slot);
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Initialize parking slot lists with new empty parking slots.
         /// </summary>
         private void Initialize()

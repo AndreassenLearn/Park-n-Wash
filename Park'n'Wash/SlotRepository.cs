@@ -63,13 +63,18 @@ namespace Park_n_Wash
         /// Update existing slot in repository. If it doesn't exist; insert it.
         /// </summary>
         /// <param name="slot"><see cref="ISlot"/> to update (or insert).</param>
-        public void Update(ISlot slot)
+        public bool Update(ISlot slot)
         {
             ISlot slotToUpdate = _slots.Where(x => x.Id == slot.Id).FirstOrDefault();
             if (slotToUpdate != null && slot.IsValid)
+            {
                 slotToUpdate = slot;
+                return true;
+            }
             else
-                Insert(slot);
+            {
+                return Insert(slot);
+            }
         }
 
         /// <summary>

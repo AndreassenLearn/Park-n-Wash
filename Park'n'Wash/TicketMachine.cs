@@ -49,18 +49,19 @@ namespace Park_n_Wash
             }
         }
 
+        // Park
         public static void ParkCheckIn()
         {
             _slotController.GetAvailableSlots(out List<ISlot> normalSlots, out List<ISlot> handicapSlots, out List<ISlot> largeSlots, out List<ISlot> trailerSlots);
 
-            //UserOption option = (UserOption)UserInteraction.SelectOption(new List<IPrintable>()
-            //{
-            //    new UserOption($"Regular slots: {normalSlots.Count} ({_slotController.ElectricCountAndSort(normalSlots)} of which offers electric charging)", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/)),
-            //    new UserOption($"Handicap slots: {handicapSlots.Count}", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/)),
-            //    new UserOption($"Large slots (bus/lorry): {largeSlots.Count}", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/)),
-            //    new UserOption($"Trailer slots: {trailerSlots.Count}", new UserOption.OptionFunction(/*FUNCTION DELEGATE*/))
-            //}, "Available parking slots");
-            //option.Execute();
+            UserOption option = (UserOption)UserInteraction.SelectOption(new List<IPrintable>()
+            {
+                new UserOption($"Regular slots: {normalSlots.Count} ({_slotController.ElectricCountAndSort(normalSlots)} of which offers electric charging)", new UserOption.OptionFunctionSlots(TicketMachine.ParkOrder), normalSlots),
+                new UserOption($"Handicap slots: {handicapSlots.Count}", new UserOption.OptionFunctionSlots(TicketMachine.ParkOrder), handicapSlots),
+                new UserOption($"Large slots (bus/lorry): {largeSlots.Count}", new UserOption.OptionFunctionSlots(TicketMachine.ParkOrder), largeSlots),
+                new UserOption($"Trailer slots: {trailerSlots.Count}", new UserOption.OptionFunctionSlots(TicketMachine.ParkOrder), trailerSlots)
+            }, "Check In");
+            option.Execute();
         }
 
         public static void ParkCheckOut()
@@ -68,6 +69,25 @@ namespace Park_n_Wash
             
         }
 
+        public static void ParkOrder(List<ISlot> slots)
+        {
+            bool electric = false;
+            if (slots.Any(x => x.HasCharger == true))
+                electric = UserInteraction.YesNo("Electric charging (FREE)");
+            
+            bool service = UserInteraction.YesNo("Service (Requires parking in up to 48 hours) (+479,99 kr.)");
+            
+            foreach (ISlot slot in slots)
+            {
+                if (_ticketController.NewSlotTicket(slot, electric, service, out ITicket ticket, _slotController))
+                {
+                    RegisterNewTicket(ticket);
+                    break;
+                }
+            }
+        }
+
+        // Wash
         public static void WashOrder()
         {
             List<IPrintable> options = new List<IPrintable>();
@@ -149,11 +169,11 @@ namespace Park_n_Wash
             }
         }
 
+        // General
         public static void RegisterNewTicket(ITicket ticket)
         {
-            _ticketController.AddTicket(ticket);
-
-            (ticket as IPrintable).PrintToConsole();
+            if (_ticketController.AddTicket(ticket))
+                (ticket as IPrintable).PrintToConsole();
         }
     }
 }

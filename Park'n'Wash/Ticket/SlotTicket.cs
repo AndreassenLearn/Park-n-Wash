@@ -47,7 +47,7 @@ namespace Park_n_Wash.Ticket
             $"# ##\n" +
             $"# ##  Ticket: {Id} Slot: {ParkingSlot.Id}\n" +
             $"# ##\n" +
-            $"# ##  Start Time: {StartTime} End Time: {(EndTime.HasValue ? EndTime.Value.ToString() : "N/A")}\n" +
+            $"# ##  Start Time: {StartTime} - End Time: {(EndTime.HasValue ? EndTime.Value.ToString() : "N/A")}\n" +
             $"# ##  Total hours: {TotalHours}\n" +
             $"# ##  Charging: {(Electric? "Y" : "N")}\n" +
             $"# ##\n" +
@@ -60,7 +60,7 @@ namespace Park_n_Wash.Ticket
 
             if (StartTime == null) isValid = false;
             if (ParkingSlot == null) isValid = false;
-            if (!(Electric && ParkingSlot.HasCharger)) isValid = false;
+            if (Electric && !ParkingSlot.HasCharger) isValid = false;
             if (Price < 0) isValid = false;
 
             return isValid;

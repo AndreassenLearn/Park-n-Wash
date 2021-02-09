@@ -54,13 +54,18 @@ namespace Park_n_Wash
         /// Update existing wash in repository. If it doesn't exist; insert it.
         /// </summary>
         /// <param name="wash"><see cref="IWash"/> to update (or insert).</param>
-        public void Update(IWash wash)
+        public bool Update(IWash wash)
         {
             IWash washToUpdate = _washes.Where(x => x.Id == wash.Id).FirstOrDefault();
             if (washToUpdate != null && wash.IsValid)
+            {
                 washToUpdate = wash;
+                return true;
+            }
             else
-                Insert(wash);
+            {
+                return Insert(wash);
+            }
         }
 
         /// <summary>

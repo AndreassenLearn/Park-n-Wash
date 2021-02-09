@@ -100,6 +100,22 @@ namespace Park_n_Wash.Common
         }
 
         /// <summary>
+        /// Let user answer with yes or no.
+        /// </summary>
+        /// <param name="question">Question to ask user.</param>
+        /// <returns>True if user enters 'Y' or 'y' and false if 'N' or 'n'.</returns>
+        static public bool YesNo(string question)
+        {
+            Console.Write($"{question}? (Y/N): ");
+            List<char> positive = new List<char>() { 'Y', 'y' };
+            List<char> valid = new List<char>() { 'N', 'n' };
+            valid.AddRange(positive);
+            if (positive.Contains(GetChar(valid))) return true;
+
+            return false;
+        }
+
+        /// <summary>
         /// Print title to the console.
         /// </summary>
         /// <param name="title">Title text.</param>
