@@ -119,7 +119,7 @@ Generating statistics for car wash #0 now.
 
 ## Technical Implementation
 ### Classes
-A class diagram called 'ClassDiagram.md' can be found in the project folder; 'Park'n'Wash'.
+A class diagram called 'ClassDiagram.cd' can be found in the project folder; 'Park'n'Wash'.
 
 ### Option Menues
 The option menues is build using a list of UserOption objects. By UserOption implementing the IPrintable interface, UserInteraction can print a numbered list of the UserOption objects using the PrintableString() method provided by the interface.
