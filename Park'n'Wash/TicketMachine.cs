@@ -71,7 +71,7 @@ namespace Park_n_Wash
             if (ticket != null)
             {
                 _ticketController.CheckOutSlotTicket(ticket, _slotController);
-                Console.WriteLine("Successful checkout.");
+                (ticket as IPrintable).PrintToConsole();
             }
             else
             {

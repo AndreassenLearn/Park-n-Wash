@@ -53,13 +53,13 @@ namespace Park_n_Wash.Ticket
 
         public string PrintableString() =>
             $"# ##\n" +
-            $"# ##  Ticket: {Id} Slot: {ParkingSlot.Id}\n" +
+            $"# ##  Ticket: {Id} - Slot: {ParkingSlot.Id}\n" +
             $"# ##\n" +
             $"# ##  Start Time: {StartTime} - End Time: {(EndTime.HasValue ? EndTime.Value.ToString() : "N/A")}\n" +
-            $"# ##  Total hours: {TotalHours}\n" +
+            $"# ##  Total hours: {Math.Round(TotalHours, 3)}\n" +
             $"# ##  Charging: {(Electric? "Y" : "N")}\n" +
             $"# ##\n" +
-            $"# ##  Price: {Price} kr.\n" +
+            $"# ##  Price: {Math.Round(Price, 2)} kr.\n" +
             $"# ##\n\n";
 
         public override bool Validate()

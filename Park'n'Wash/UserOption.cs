@@ -50,6 +50,9 @@ namespace Park_n_Wash
             Ticket = ticket;
         }
 
+        /// <summary>
+        /// Execute the associated function.
+        /// </summary>
         public void Execute()
         {
             if (_optionFunction != null)
