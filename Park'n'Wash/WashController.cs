@@ -47,6 +47,15 @@ namespace Park_n_Wash
         }
 
         /// <summary>
+        /// Get list of all car wash IDs.
+        /// </summary>
+        /// <returns>List of int.</returns>
+        public List<int> GetCarWashIds()
+        {
+            return _carWashRepository.GetAll().Select(x => x.Id).ToList();
+        }
+
+        /// <summary>
         /// Start a <see cref="IWash"/> in soonest available <see cref="CarWash"/>.
         /// </summary>
         /// <param name="washTicket"><see cref="IWashTicket"/> to use.</param>
@@ -141,23 +150,32 @@ namespace Park_n_Wash
 
         // General
         /// <summary>
-        /// Print statistics for <see cref="CarWash"/> with given ID.
+        /// Get statistics for <see cref="CarWash"/> with given ID.
         /// </summary>
         /// <param name="carWashId">ID of <see cref="CarWash"/>.</param>
-        /// <returns></returns>
-        public async Task PrintStatistics(int carWashId)
+        /// <returns>Dictionary of string pairs. Key is the measured statistic item and value is its value.</returns>
+        public async Task<Dictionary<string, string>> GetStatisticsAsync(int carWashId)
         {
             List<string[]> content = await LogHandler.ReadLogAsync(_logFileName + carWashId + _logFileExtension, _logDelimiter);
-
+            
             Dictionary<string, string> statPairs = new Dictionary<string, string>();
             List<string> washNames = _washRepository.GetAll().Select(x => x.Name).ToList();
-            
+
             foreach (string washName in washNames)
             {
                 string washCount = content.Where(x => x[4] == washName && x[6] != "Canceled").Count().ToString();
                 statPairs.Add(washName, washCount);
             }
 
+            return statPairs;
+        }
+
+        /// <summary>
+        /// Print statistics.
+        /// </summary>
+        /// <param name="statPairs">Dictionary of string pairs. Key is the measured statistic item and value is its value.</param>
+        public void PrintStatistics(Dictionary<string, string> statPairs)
+        {
             foreach (KeyValuePair<string, string> statPair in statPairs)
             {
                 Console.WriteLine($"{statPair.Key}: {statPair.Value}");

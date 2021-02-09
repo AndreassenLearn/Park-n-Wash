@@ -12,14 +12,17 @@ namespace Park_n_Wash
     public class UserOption : IPrintable
     {
         private OptionFunction _optionFunction;
+        private OptionFunctionNumber _optionFunctionNumber;
         private OptionFunctionSlots _optionFunctionSlots;
         private OptionFunctionTicket _optionFunctionTicket;
         
         public delegate void OptionFunction();
+        public delegate void OptionFunctionNumber(int number);
         public delegate void OptionFunctionSlots(List<ISlot> slots);
         public delegate void OptionFunctionTicket(ITicket ticket);
 
         public string Text { get; set; }
+        private int Number { get; set; }
         private List<ISlot> Slots { get; set; }
         private ITicket Ticket { get; set; }
 
@@ -30,6 +33,11 @@ namespace Park_n_Wash
         public UserOption(string text, OptionFunction optionFunction) : this(text)
         {
             _optionFunction = optionFunction;
+        }
+        public UserOption(string text, OptionFunctionNumber optionFunctionNumber, int number) : this(text)
+        {
+            _optionFunctionNumber = optionFunctionNumber;
+            Number = number;
         }
         public UserOption(string text, OptionFunctionSlots optionFunctionSlots, List<ISlot> slots) : this(text)
         {
@@ -46,6 +54,8 @@ namespace Park_n_Wash
         {
             if (_optionFunction != null)
                 _optionFunction();
+            else if (_optionFunctionNumber != null)
+                _optionFunctionNumber(Number);
             else if (_optionFunctionSlots != null)
                 _optionFunctionSlots(Slots);
             else if (_optionFunctionTicket != null)

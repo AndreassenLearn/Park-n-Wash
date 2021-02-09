@@ -14,10 +14,13 @@ namespace Park_n_Wash.Common
         /// </summary>
         /// <param name="filePath">Path of file.</param>
         /// <param name="delimiter">Delimitor used in file.</param>
-        /// <returns>List of string arrays, where each array is the fields in a line.</returns>
+        /// <returns>List of string arrays, where each array is the fields in a line. If file doesn't exists; list will be empty.</returns>
         public static async Task<List<string[]>> ReadLogAsync(string filePath, char delimiter)
         {
             List<string[]> content = new List<string[]>();
+            if (!File.Exists(filePath))
+                return content;
+
             await Task.Run(() =>
             {
                 using (StreamReader reader = new StreamReader(filePath))
