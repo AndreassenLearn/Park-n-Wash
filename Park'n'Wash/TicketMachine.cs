@@ -81,7 +81,7 @@ namespace Park_n_Wash
 
         public static void ParkOrder(List<ISlot> slots)
         {
-            if (slots != null && slots.Count > 0)
+            if (slots != null && slots.Count == 0)
             {
                 Console.WriteLine("Sorry, there's no more free spots of the desired type.");
                 return;
