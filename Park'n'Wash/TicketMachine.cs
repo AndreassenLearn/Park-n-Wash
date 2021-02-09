@@ -1,5 +1,7 @@
 ﻿using Park_n_Wash.Common;
 using Park_n_Wash.Slot;
+using Park_n_Wash.Ticket;
+using Park_n_Wash.Wash;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,15 @@ namespace Park_n_Wash
     {
         private static SlotController _slotController;
         private static TicketController _ticketController;
+        private static WashController _washController;
+
+        private static Dictionary<int, Task<Dictionary<string, string>>> _washStatistics = new Dictionary<int, Task<Dictionary<string, string>>>();
 
         public TicketMachine()
         {
             _slotController = new SlotController();
             _ticketController = new TicketController();
+            _washController = new WashController();
         }
 
         /// <summary>
@@ -26,7 +32,7 @@ namespace Park_n_Wash
         {
             while (true)
             {
-                Console.Clear();
+                ConsoleService.Clear();
                 Console.WriteLine("Welcome to Park'n'Wash\n");
 
                 UserOption option = (UserOption)UserInteraction.SelectOption(new List<IPrintable>()
@@ -34,7 +40,10 @@ namespace Park_n_Wash
                     new UserOption("Park: Check In", new UserOption.OptionFunction(TicketMachine.ParkCheckIn)),
                     new UserOption("Park: Check Out", new UserOption.OptionFunction(TicketMachine.ParkCheckOut)),
                     new UserOption("Wash: Order", new UserOption.OptionFunction(TicketMachine.WashOrder)),
-                    new UserOption("Wash: Start", new UserOption.OptionFunction(TicketMachine.WashStart))
+                    new UserOption("Wash: Start", new UserOption.OptionFunction(TicketMachine.WashStart)),
+                    new UserOption("Wash: Cancel", new UserOption.OptionFunction(TicketMachine.WashCancel)),
+                    new UserOption("Wash: Inspect", new UserOption.OptionFunction(TicketMachine.WashInspect)),
+                    new UserOption("Wash: Statistics", new UserOption.OptionFunction(TicketMachine.WashStatistics))
                 });
                 option.Execute();
             }
@@ -61,12 +70,90 @@ namespace Park_n_Wash
 
         public static void WashOrder()
         {
-
+            List<IPrintable> options = new List<IPrintable>();
+            int nextId = _ticketController.GetNextId();
+            foreach (IWash wash in _washController.GetWashes())
+            {
+                options.Add(new UserOption($"{wash.Name} - {wash.Price} kr.", new UserOption.OptionFunctionTicket(TicketMachine.RegisterNewTicket), new WashTicket(nextId, wash)));
+            }
+            
+            UserOption option = (UserOption)UserInteraction.SelectOption(options, "Choose wash type");
+            option.Execute();
         }
 
         public static void WashStart()
         {
+            int id = UserInteraction.GetInt("Start Wash", "Enter ticket ID");
+            IWashTicket ticket = _ticketController.GetUnusedWashTicketById(id);
+            if (ticket != null)
+            {
+                if (!_washController.StartCarWash(ticket))
+                    Console.WriteLine("Unable to start wash. Has this ticket has already been used?");
+            }
+            else
+            {
+                Console.WriteLine("Invalid ID.");
+            }
+        }
 
+        public static void WashCancel()
+        {
+            int id = UserInteraction.GetInt("Cancel Wash", "Enter car wash number");
+            if (!_washController.CancelCarWash(id))
+                Console.WriteLine($"Unable to cancel. Is the car wash #{id} running?");
+        }
+
+        public static void WashInspect()
+        {
+            ConsoleService.PrintToConsole(_washController.GetPrintableCarWashes());
+        }
+
+        public static void WashStatistics()
+        {
+            List<IPrintable> options = new List<IPrintable>();
+            foreach (int carWashId in _washController.GetCarWashIds())
+            {
+                options.Add(new UserOption($"Show: Car wash #{carWashId}", new UserOption.OptionFunctionNumber(TicketMachine.WashPrintStatistics), carWashId));
+                options.Add(new UserOption($"Update: Car wash #{carWashId}", new UserOption.OptionFunctionNumber(TicketMachine.WashGetStatistics), carWashId));
+            }
+            
+            UserOption option = (UserOption)UserInteraction.SelectOption(options);
+            option.Execute();
+        }
+
+        public static void WashGetStatistics(int carWashId)
+        {
+            Console.WriteLine($"Generating statistics for car wash #{carWashId} now.");
+            
+            Task<Dictionary<string,string>> task = _washController.GetStatisticsAsync(carWashId);
+
+            if (_washStatistics.ContainsKey(carWashId))
+                _washStatistics[carWashId] = task;
+            else
+                _washStatistics.Add(carWashId, task);
+        }
+
+        public static void WashPrintStatistics(int carWashId)
+        {
+            if (_washStatistics.ContainsKey(carWashId))
+            {
+                if (_washStatistics[carWashId].IsCompleted)
+                    _washController.PrintStatistics(_washStatistics[carWashId].Result);
+                else
+                    Console.WriteLine($"Statistics for car wash #{carWashId} is currently being generated or updated. Nothing to show yet.");
+            }
+            else
+            {
+                Console.WriteLine($"There's no statistics for car wash #{carWashId}.");
+                WashGetStatistics(carWashId);
+            }
+        }
+
+        public static void RegisterNewTicket(ITicket ticket)
+        {
+            _ticketController.AddTicket(ticket);
+
+            (ticket as IPrintable).PrintToConsole();
         }
     }
 }

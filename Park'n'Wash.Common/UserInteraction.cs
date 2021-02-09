@@ -29,6 +29,21 @@ namespace Park_n_Wash.Common
         }
 
         /// <summary>
+        /// Get int value from user, in given interval. Retry until a valid value has been entered. Also prints title and field.
+        /// </summary>
+        /// <param name="title">Title text.</param>
+        /// <param name="field">Field text suffixed with ": ".</param>
+        /// <param name="min">Minimum return value.</param>
+        /// <param name="max">Maximum return value.</param>
+        /// <returns>User input as int.</returns>
+        static public int GetInt(string title, string field, int min = Int32.MinValue, int max = Int32.MaxValue)
+        {
+            Title(title);
+            Console.Write($"{field}: ");
+            return GetInt(min, max);
+        }
+
+        /// <summary>
         /// Get char value from user. Retry until a valid value has been entered.
         /// </summary>
         /// <param name="validChars">User input has to be one of these chars. If null; all chars is valid.</param>
@@ -58,7 +73,7 @@ namespace Park_n_Wash.Common
             if (options == null || options.Count == 0)
                 return -1;
 
-            Console.WriteLine("##### " + title + " #####");
+            Title(title);
             for (int i = 1; i <= options.Count; i++)
             {
                 Console.WriteLine(i + ". " + options[i - 1]);
@@ -75,13 +90,22 @@ namespace Park_n_Wash.Common
         /// <returns>Option chosen by index.</returns>
         static public IPrintable SelectOption(List<IPrintable> options, string title = "Choose one")
         {
-            Console.WriteLine("##### " + title + " #####");
+            Title(title);
             for (int i = 1; i <= options.Count; i++)
             {
                 Console.WriteLine(i + ". " + options[i - 1].PrintableString());
             }
 
             return options[GetInt(1, options.Count) - 1];
+        }
+
+        /// <summary>
+        /// Print title to the console.
+        /// </summary>
+        /// <param name="title">Title text.</param>
+        static private void Title(string title)
+        {
+            Console.WriteLine("##### " + title + " #####");
         }
 
         /// <summary>

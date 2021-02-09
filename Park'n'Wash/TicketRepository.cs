@@ -15,15 +15,20 @@ namespace Park_n_Wash
         {
             _tickets = new List<ITicket>();
         }
-
+        
         /// <summary>
         /// Add ticket to repository.
         /// </summary>
         /// <param name="ticket"><see cref="Ticket"/> to insert.</param>
-        public void Insert(ITicket ticket)
+        public bool Insert(ITicket ticket)
         {
             if (ticket.IsValid)
+            {
                 _tickets.Add(ticket);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -42,7 +47,7 @@ namespace Park_n_Wash
         /// <returns><see cref="Ticket"/></returns>
         public ITicket GetById(int id)
         {
-            return _tickets.Where(x => x.Id == id).FirstOrDefault();
+            return _tickets.Where(x => x.Id == id && x.EntityState.Equals(EntityStateOption.Active)).FirstOrDefault();
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Park_n_Wash.Ticket
 {
-    public abstract class Ticket : BusinessEntity, ITicket
+    public abstract class SlotTicket : BusinessEntity, ISlotTicket
     {
         public int Id { get; }
         public DateTime StartTime { get; }
@@ -17,7 +17,7 @@ namespace Park_n_Wash.Ticket
         public bool Electric { get; }
         public double Price { get; protected set; }
 
-        public Ticket(int ticketId, ISlot parkingSlot, bool includeCharging = false)
+        public SlotTicket(int ticketId, ISlot parkingSlot, bool includeCharging = false)
         {
             Id = ticketId;
             StartTime = DateTime.Now;

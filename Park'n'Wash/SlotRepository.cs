@@ -20,10 +20,15 @@ namespace Park_n_Wash
         /// Add slot to repository.
         /// </summary>
         /// <param name="slot"><see cref="Slot"/> to insert.</param>
-        public void Insert(ISlot slot)
+        public bool Insert(ISlot slot)
         {
-            if (slot.Validate())
+            if (slot.IsValid)
+            {
                 _slots.Add(slot);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

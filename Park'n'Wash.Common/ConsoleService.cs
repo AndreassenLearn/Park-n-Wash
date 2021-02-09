@@ -42,5 +42,13 @@ namespace Park_n_Wash.Common
         {
             Console.WriteLine(printable.PrintableString());
         }
+
+        /// <summary>
+        /// Clear console.
+        /// </summary>
+        public static void Clear()
+        {
+            //Console.Clear();
+        }
     }
 }
