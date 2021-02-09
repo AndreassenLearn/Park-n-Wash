@@ -105,6 +105,11 @@ namespace Park_n_Wash
             ConsoleService.PrintToConsole(_washController.GetPrintableCarWashes());
         }
 
+        public static void WashStatistics(int carWashId)
+        {
+            // TODO: Print statistics with _washController.PrintStatistics().
+        }
+
         public static void RegisterNewTicket(ITicket ticket)
         {
             _ticketController.AddTicket(ticket);

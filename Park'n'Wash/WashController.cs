@@ -15,7 +15,7 @@ namespace Park_n_Wash
     {
         private string _logFileName = "log_CarWash";
         private string _logFileExtension = ".csv";
-        private string _logDelimiter = ";";
+        private char _logDelimiter = ';';
         
         private CarWashRepository _carWashRepository;
         private WashProcessRepository _washProcessRepository;
@@ -141,6 +141,30 @@ namespace Park_n_Wash
 
         // General
         /// <summary>
+        /// Print statistics for <see cref="CarWash"/> with given ID.
+        /// </summary>
+        /// <param name="carWashId">ID of <see cref="CarWash"/>.</param>
+        /// <returns></returns>
+        public async Task PrintStatistics(int carWashId)
+        {
+            List<string[]> content = await LogHandler.ReadLogAsync(_logFileName + carWashId + _logFileExtension, _logDelimiter);
+
+            Dictionary<string, string> statPairs = new Dictionary<string, string>();
+            List<string> washNames = _washRepository.GetAll().Select(x => x.Name).ToList();
+            
+            foreach (string washName in washNames)
+            {
+                string washCount = content.Where(x => x[4] == washName && x[6] != "Canceled").Count().ToString();
+                statPairs.Add(washName, washCount);
+            }
+
+            foreach (KeyValuePair<string, string> statPair in statPairs)
+            {
+                Console.WriteLine($"{statPair.Key}: {statPair.Value}");
+            }
+        }
+
+        /// <summary>
         /// Write log with ID's, status, and time information.
         /// </summary>
         /// <param name="carWash"><see cref="CarWash"/> to log.</param>
@@ -156,11 +180,11 @@ namespace Park_n_Wash
             if (!File.Exists(logFilePath))
             {
                 string[] headers = new string[] { "Time", "CarWash ID", "Ticket ID", "Wash ID", "Wash name", "Estimated finish time", "Wash status" };
-                stringBuilder.AppendLine(string.Join(_logDelimiter, headers));
+                stringBuilder.AppendLine(string.Join(_logDelimiter.ToString(), headers));
             }
 
             string[] content = new string[] { DateTime.Now.ToString(), carWash.Id.ToString(), washTicket.Id.ToString(), washTicket.Wash.Id.ToString(), washTicket.Wash.Name, carWash.FinishAt.ToString(), washStatus.ToString() };
-            stringBuilder.AppendLine(string.Join(_logDelimiter, content));
+            stringBuilder.AppendLine(string.Join(_logDelimiter.ToString(), content));
 
             File.AppendAllText(logFilePath, stringBuilder.ToString());
         }
