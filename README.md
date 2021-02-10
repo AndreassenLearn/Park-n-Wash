@@ -130,7 +130,7 @@ Whatever UserOption chosen (returned from UserInteraction after user inputs numb
 
 UserOption contains a contructor for each supported template and it's parameters and properties with various types to hold values for the parameters. The call of the method happens in `UserOption.Execute`, where the assigned delegate method is called with the correct parameters.
 
-## Known issues and limitations
+## Known Issues and Limitations
 * No "Go Back" option in menues.
 * Weather service is included or not, is not shown on parking ticket.
 * Parking tickets with included service cannot be checked out.
