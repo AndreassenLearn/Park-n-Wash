@@ -133,6 +133,7 @@ UserOption contains a contructor for each supported template and it's parameters
 ## Known issues and limitations
 * No "Go Back" option in menues.
 * Weather service is included or not, is not shown on parking ticket.
+* Parking tickets with included service cannot be checked out.
 
 ## Versioning
 ### v0.2.1
